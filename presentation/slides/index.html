@@ -178,13 +178,22 @@
       font-size: clamp(1.8rem, 3.4vw, 2.6rem);
     }
     /* هویت: متن راست، لوگو چپِ باکس اصلی */
+    /* هویت: ردیف ۱ دوستونه (تیتر+متن | لوگو)؛ باکس‌ها تمام‌عرض پایین */
     .slide[data-title="هویت-جایگاه"] {
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: center;
+      gap: 1.15rem;
+    }
+    .slide[data-title="هویت-جایگاه"] .identity-split {
+      display: flex;
       flex-direction: row;
       align-items: center;
       gap: clamp(1.5rem, 4vw, 3.5rem);
+      width: 100%;
     }
     .slide[data-title="هویت-جایگاه"] .identity-copy {
-      flex: 1.15;
+      flex: 1;
       display: flex;
       flex-direction: column;
       gap: 1.15rem;
@@ -194,8 +203,11 @@
       max-width: none;
       font-size: clamp(1.8rem, 3.4vw, 2.6rem);
     }
+    .slide[data-title="هویت-جایگاه"] .identity-copy .lede {
+      max-width: none;
+    }
     .slide[data-title="هویت-جایگاه"] .identity-logo {
-      flex: 0.85;
+      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -204,6 +216,90 @@
     .slide[data-title="هویت-جایگاه"] .identity-logo .brand-logo {
       width: clamp(9rem, 22vw, 16rem);
       height: auto;
+    }
+    .slide[data-title="هویت-جایگاه"] .tech-pair {
+      max-width: none;
+      width: 100%;
+    }
+    /* اندازه بازار — همان split ماژول‌ها؛ دایره‌های توپر روی پنل خاکستری */
+    .slide.market-size .market-copy {
+      justify-content: center;
+      gap: 1.35rem;
+    }
+    .slide.market-size .market-copy h2 {
+      max-width: none;
+      font-size: clamp(2rem, 4vw, 3.1rem);
+    }
+    .market-caption {
+      font-size: clamp(0.92rem, 1.25vw, 1.05rem);
+      color: var(--muted);
+      line-height: 1.75;
+      font-weight: 500;
+      max-width: 36ch;
+    }
+    .market-facts {
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      gap: 0.85rem;
+      margin-top: 0.35rem;
+      width: 100%;
+    }
+    .market-fact {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 0.35rem;
+      padding: 1rem 1.05rem;
+      background: var(--card);
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      min-width: 0;
+    }
+    .market-fact strong {
+      display: block;
+      font-size: clamp(1.3rem, 2.1vw, 1.7rem);
+      font-weight: 800;
+      color: var(--blue);
+      font-variant-numeric: tabular-nums;
+      line-height: 1.2;
+    }
+    .market-fact span {
+      font-size: 0.88rem;
+      color: var(--muted);
+      font-weight: 500;
+      line-height: 1.45;
+    }
+    .market-rings {
+      width: min(100%, 34rem);
+      height: auto;
+      display: block;
+      overflow: visible;
+    }
+    .market-rings .ring {
+      stroke: none;
+    }
+    .market-rings .ring-1 { fill: #d4dbfc; }
+    .market-rings .ring-2 { fill: #a8b4f0; }
+    .market-rings .ring-3 { fill: #3d52c4; }
+    .market-rings .ring-val {
+      fill: #ffffff;
+      font-family: "Vazirmatn", system-ui, sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      text-anchor: middle;
+    }
+    .market-rings .ring-label {
+      fill: #ffffff;
+      font-family: "Vazirmatn", system-ui, sans-serif;
+      text-anchor: middle;
+    }
+    .market-rings .ring-name {
+      font-size: 13px;
+      font-weight: 600;
+      opacity: 0.92;
     }
     /* Module slides: text | gray visual with loop — desktop landscape only */
     .slide.split-module {
@@ -708,6 +804,604 @@
       font-weight: 800;
     }
 
+    /* Roadmap Gantt — Pitch-style; axis LTR (each tick = 1 month) */
+    .slide[data-title="نقشهراه"] {
+      justify-content: flex-start;
+      gap: 1.4rem;
+      max-width: 1180px;
+    }
+    .slide[data-title="نقشهراه"] h2 {
+      max-width: none;
+    }
+    .gantt-note {
+      font-size: 0.9rem;
+      color: var(--muted);
+      font-weight: 500;
+      line-height: 1.55;
+      max-width: 56ch;
+      margin-top: -0.35rem;
+    }
+    .gantt {
+      direction: ltr;
+      width: 100%;
+      margin-top: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .gantt-rows {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      padding-bottom: 0.35rem;
+    }
+    .gantt-rows::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 0.2rem 0;
+      background-image: repeating-linear-gradient(
+        to right,
+        transparent 0,
+        transparent calc(100% / 17 - 1px),
+        rgba(46, 71, 245, 0.1) calc(100% / 17 - 1px),
+        rgba(46, 71, 245, 0.1) calc(100% / 17)
+      );
+      pointer-events: none;
+      z-index: 0;
+    }
+    .gantt-row {
+      position: relative;
+      height: 2.55rem;
+      z-index: 1;
+    }
+    .gantt-bar {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      padding: 0 0.85rem;
+      border-radius: 8px;
+      background: var(--blue);
+      color: #fff;
+      font-size: clamp(0.78rem, 1.05vw, 0.92rem);
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      box-shadow: 0 8px 22px rgba(46, 71, 245, 0.18);
+    }
+    .gantt-bar.pilot {
+      background: #e8ecff;
+      color: var(--blue);
+      border: 1.5px solid color-mix(in srgb, var(--blue) 35%, white);
+      box-shadow: none;
+      font-size: clamp(0.72rem, 0.95vw, 0.84rem);
+      min-width: 0;
+      padding: 0 0.45rem;
+      overflow: visible;
+      z-index: 2;
+    }
+    .gantt-bar.pilot .pilot-label {
+      position: absolute;
+      left: 100%;
+      margin-inline-start: 0.45rem;
+      white-space: nowrap;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: clamp(0.78rem, 1vw, 0.88rem);
+    }
+    .gantt-bar .dur {
+      margin-inline-start: 0.35rem;
+      font-weight: 500;
+      opacity: 0.85;
+      font-size: 0.9em;
+    }
+    .gantt-axis {
+      position: relative;
+      height: 2.4rem;
+      border-top: 1.5px solid rgba(46, 71, 245, 0.22);
+      margin-top: 0.15rem;
+    }
+    .gantt-tick {
+      position: absolute;
+      top: 0;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.28rem;
+    }
+    .gantt-tick:first-child { transform: none; align-items: flex-start; }
+    .gantt-tick:last-child { transform: translateX(-100%); align-items: flex-end; }
+    .gantt-tick::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--blue);
+      margin-top: -4px;
+    }
+    .gantt-tick span {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.01em;
+    }
+    .gantt-tick.milestone span {
+      color: var(--blue);
+      font-weight: 800;
+    }
+    .gantt-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.4rem;
+      margin-top: 0.35rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .gantt-legend strong {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    /* تصمیم و درخواست — جدول متنی (اسلاید ۱۷) */
+    .slide[data-title="تصمیم-درخواست"] {
+      justify-content: flex-start;
+      gap: 1rem;
+      max-width: 1100px;
+    }
+    .slide[data-title="تصمیم-درخواست"] h2 { max-width: none; }
+    .gate-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: clamp(0.82rem, 1.15vw, 0.95rem);
+      line-height: 1.55;
+    }
+    .gate-table th,
+    .gate-table td {
+      text-align: right;
+      padding: 0.65rem 0.75rem;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+    .gate-table th {
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.78rem;
+    }
+    .gate-table td:first-child {
+      color: var(--blue);
+      font-weight: 800;
+      white-space: nowrap;
+      width: 9.5rem;
+    }
+    .gate-table td:last-child {
+      color: var(--muted);
+      font-weight: 600;
+      white-space: nowrap;
+      width: 5.5rem;
+    }
+    .ask-steps {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      width: 100%;
+      max-width: 980px;
+    }
+    @media (max-width: 700px) {
+      .ask-steps { grid-template-columns: 1fr; }
+    }
+    .ask-steps .box strong {
+      font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+    }
+
+    /* پیشنهاد ویژوال — نوار گیت + نردبان سرمایه */
+    .slide[data-title="تصمیم-ویژوال"] {
+      justify-content: flex-start;
+      gap: 1.15rem;
+      max-width: 1180px;
+    }
+    .slide[data-title="تصمیم-ویژوال"] h2 { max-width: none; }
+    .viz-draft {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--warn);
+      background: #fff7ed;
+      border: 1px solid color-mix(in srgb, var(--warn) 28%, white);
+      border-radius: 999px;
+      padding: 0.28rem 0.75rem;
+      width: fit-content;
+    }
+    .gate-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.55rem;
+      width: 100%;
+      position: relative;
+    }
+    @media (max-width: 860px) {
+      .gate-strip { grid-template-columns: 1fr 1fr; }
+    }
+    .gate-card {
+      background: var(--card);
+      border: 1.5px solid var(--line);
+      border-radius: 16px;
+      padding: 0.85rem 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      min-height: 7.8rem;
+      position: relative;
+      box-shadow: var(--shadow);
+    }
+    .gate-card .g-num {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--blue);
+      letter-spacing: 0.04em;
+    }
+    .gate-card strong {
+      font-size: clamp(0.98rem, 1.4vw, 1.12rem);
+      color: var(--ink);
+      font-weight: 800;
+      line-height: 1.35;
+    }
+    .gate-card .g-bar {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 500;
+      line-height: 1.45;
+      flex: 1;
+    }
+    .gate-card .g-due {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--blue);
+    }
+    .gate-card .g-kill {
+      margin-top: 0.35rem;
+      padding-top: 0.45rem;
+      border-top: 1px dashed color-mix(in srgb, var(--warn) 35%, white);
+      color: var(--warn);
+      font-size: 0.78rem;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+    .capital-ladder {
+      display: grid;
+      grid-template-columns: 1.05fr auto 1.35fr;
+      gap: 0.65rem;
+      align-items: stretch;
+      width: 100%;
+      margin-top: 0.15rem;
+    }
+    @media (max-width: 800px) {
+      .capital-ladder { grid-template-columns: 1fr; }
+      .capital-ladder .ladder-arrow { display: none; }
+    }
+    .ladder-step {
+      background: #f7f8ff;
+      border: 1.5px solid var(--line);
+      border-radius: 16px;
+      padding: 1rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .ladder-step .ls-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--muted);
+    }
+    .ladder-step strong {
+      font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+      color: var(--blue);
+      font-weight: 800;
+      line-height: 1.2;
+    }
+    .ladder-step p {
+      font-size: 0.88rem;
+      color: var(--ink);
+      font-weight: 500;
+      line-height: 1.5;
+    }
+    .ladder-step.ceiling {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+      box-shadow: 0 12px 32px rgba(46, 71, 245, 0.22);
+    }
+    .ladder-step.ceiling .ls-label { color: rgba(255, 255, 255, 0.78); }
+    .ladder-step.ceiling strong { color: #fff; }
+    .ladder-step.ceiling p { color: rgba(255, 255, 255, 0.9); }
+    .ladder-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--blue);
+      font-size: 1.4rem;
+      font-weight: 800;
+      opacity: 0.55;
+    }
+    .ladder-link {
+      font-size: 0.88rem;
+      color: var(--muted);
+      font-weight: 500;
+      line-height: 1.55;
+      max-width: 62ch;
+    }
+    .ladder-link em {
+      font-style: normal;
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    /* زنجیره لایسنس — فانل (نسخه بصری همان اسلاید) */
+    .slide[data-title="زنجیره-فانل"] {
+      position: relative;
+      max-width: none;
+      margin: 0;
+      padding: 0 0 2.75rem;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: stretch;
+      gap: 0;
+    }
+    .slide[data-title="زنجیره-فانل"] .funnel-layout {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      gap: 0;
+      min-height: 0;
+      width: 100%;
+    }
+    /* DOM: visual first → در RTL سمت راست */
+    .slide[data-title="زنجیره-فانل"] .funnel-visual {
+      flex: 1.55;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+      background: #e4e6eb;
+      padding: clamp(0.75rem, 1.5vw, 1.25rem) clamp(1rem, 2vw, 1.75rem);
+    }
+    .slide[data-title="زنجیره-فانل"] .funnel-copy {
+      flex: 0.7;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.25rem;
+      min-width: 0;
+      padding: clamp(2.5rem, 6vh, 4.5rem) clamp(1.75rem, 4.5vw, 3.75rem) clamp(2rem, 4vh, 3rem);
+      background: #fff;
+    }
+    .slide[data-title="زنجیره-فانل"] .funnel-copy h2 {
+      max-width: none;
+      font-size: clamp(1.7rem, 3.1vw, 2.4rem);
+    }
+    .slide[data-title="زنجیره-فانل"] .funnel-copy .lede {
+      max-width: 34ch;
+      color: var(--ink);
+      font-size: clamp(1.02rem, 1.45vw, 1.18rem);
+      font-weight: 600;
+      line-height: 1.7;
+    }
+    .funnel-notes {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      max-width: 36ch;
+      margin-top: auto;
+    }
+    .funnel-notes .fn-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      padding-right: 0.85rem;
+      border-right: 2.5px solid var(--line);
+    }
+    .funnel-notes .fn-item strong {
+      font-size: clamp(0.92rem, 1.2vw, 1.02rem);
+      font-weight: 800;
+      color: var(--blue);
+      line-height: 1.35;
+    }
+    .funnel-notes .fn-item span {
+      font-size: clamp(0.8rem, 1.05vw, 0.9rem);
+      color: var(--muted);
+      font-weight: 500;
+      line-height: 1.5;
+    }
+    .license-funnel {
+      width: 100%;
+      max-width: none;
+      max-height: 92%;
+      height: auto;
+      display: block;
+      overflow: visible;
+    }
+    .license-funnel .funnel-outline {
+      fill: none;
+      stroke: #3d4a5c;
+      stroke-width: 1.75;
+      stroke-linejoin: round;
+    }
+    .license-funnel .funnel-divider {
+      stroke: #3d4a5c;
+      stroke-width: 1.5;
+    }
+    .license-funnel .funnel-label {
+      fill: var(--ink);
+      font-family: "Vazirmatn", system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      text-anchor: middle;
+    }
+    .license-funnel .funnel-value {
+      fill: var(--blue);
+      font-family: "Vazirmatn", system-ui, sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      text-anchor: middle;
+    }
+    .license-funnel .funnel-mult {
+      fill: var(--muted);
+      font-family: "Vazirmatn", system-ui, sans-serif;
+      font-size: 10.5px;
+      font-weight: 600;
+      text-anchor: middle;
+    }
+    .funnel-mult-html {
+      direction: rtl;
+      text-align: center;
+      font-family: "Vazirmatn", system-ui, sans-serif;
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #5c6578;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+    .funnel-mult-html bdi {
+      font-weight: 800;
+      unicode-bidi: isolate;
+    }
+
+    /* ارزش÷هزینه — لایوت رفرنسِ برعکس: متن بالا، چارت بزرگ پایین */
+    .slide[data-title="ارزش-چارت"] {
+      max-width: none;
+      margin: 0;
+      padding: 0 0 2.75rem;
+      gap: 0;
+      justify-content: stretch;
+      align-items: stretch;
+      flex-direction: column;
+    }
+    .value-copy {
+      flex: 1 1 0;
+      background: #fff;
+      padding: clamp(1.75rem, 4.5vh, 3.25rem) clamp(2rem, 6vw, 5rem) clamp(1.25rem, 3vh, 2rem);
+      display: flex;
+      flex-direction: column;
+      gap: 1.15rem;
+      align-items: flex-start;
+      justify-content: center;
+      min-height: 0;
+    }
+    .slide[data-title="ارزش-چارت"] .value-copy h2 {
+      max-width: none;
+    }
+    .slide[data-title="ارزش-چارت"] .value-copy .threshold {
+      max-width: none;
+    }
+    .value-visual {
+      flex: 1 1 0;
+      min-height: 0;
+      background: #e4e6eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(1rem, 2.5vh, 1.75rem) clamp(0.75rem, 2vw, 1.75rem) clamp(1.25rem, 3vh, 2rem);
+    }
+    .vc-chart-wrap {
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      display: flex;
+      align-items: center;
+    }
+    .vc-chart {
+      width: 100%;
+      height: auto;
+      max-height: 100%;
+      display: block;
+      overflow: visible;
+      direction: ltr;
+    }
+    .vc-chart .axis-line {
+      stroke: rgba(28, 36, 52, 0.28);
+      stroke-width: 1.5;
+    }
+    .vc-chart .grid-line {
+      stroke: rgba(28, 36, 52, 0.1);
+      stroke-width: 1;
+      stroke-dasharray: 4 4;
+    }
+    .vc-chart .breakeven {
+      stroke: var(--warn);
+      stroke-width: 2.25;
+      stroke-dasharray: 7 5;
+    }
+    .vc-chart .bar {
+      fill: var(--blue);
+    }
+    .vc-chart .bar.weak {
+      fill: #d4896a;
+    }
+    .vc-chart .bar.tight {
+      fill: #6b7de8;
+    }
+    .vc-chart .bar-label {
+      fill: #fff;
+      font-family: "Vazirmatn", system-ui, sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      text-anchor: middle;
+      direction: ltr;
+      unicode-bidi: isolate;
+    }
+    .vc-chart .tick {
+      fill: var(--ink);
+      font-family: "Vazirmatn", system-ui, sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      text-anchor: middle;
+      direction: rtl;
+      unicode-bidi: isolate;
+    }
+    .vc-chart .tick-y {
+      text-anchor: end;
+      font-variant-numeric: tabular-nums;
+      fill: var(--muted);
+      font-family: "Vazirmatn", system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      direction: ltr;
+      unicode-bidi: isolate;
+    }
+    .vc-chart .axis-title {
+      fill: var(--muted);
+      font-family: "Vazirmatn", system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      direction: rtl;
+      unicode-bidi: isolate;
+    }
+    .vc-chart .be-label {
+      fill: var(--warn);
+      font-family: "Vazirmatn", system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      direction: ltr;
+      unicode-bidi: isolate;
+    }
+    .vc-chart .verdict {
+      fill: var(--muted);
+      font-family: "Vazirmatn", system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      text-anchor: middle;
+      direction: rtl;
+      unicode-bidi: isolate;
+    }
+    .vc-chart .verdict.bad { fill: var(--warn); font-weight: 700; }
+
     .footer {
       position: fixed;
       bottom: 0; left: 0; right: 0;
@@ -789,22 +1483,24 @@
     </section>
 
     <section class="slide" data-title="هویت-جایگاه" data-section="۰۱ · اسمارتک">
-      <div class="identity-copy">
-        <h2>هویت و جایگاه</h2>
-        <p class="lede">زیرمجموعهٔ گروه دیجی‌کالا (شروع فعالیت ۹۸). به کسب‌وکارهای ایرانی کمک می‌کند مشتری را بهتر بشناسند، تبلیغ را درست‌تر خرج کنند، و اثر تعامل را بسنجند — با سوئیت marTech و adTech.</p>
-        <div class="tech-pair">
-          <div class="box">
-            <strong>marTech</strong>
-            <p>تعامل، بخش‌بندی، اتوماسیون پیام و نگهداشت — عمدتاً اینترک</p>
-          </div>
-          <div class="box">
-            <strong>adTech</strong>
-            <p>انتساب نصب، اجرای رسانه، همکاری فروش — ادتریس، ادورج، افیلیو</p>
-          </div>
+      <div class="identity-split">
+        <div class="identity-copy">
+          <h2>هویت و جایگاه</h2>
+          <p class="lede">زیرمجموعهٔ گروه دیجی‌کالا (شروع فعالیت ۹۸). به کسب‌وکارهای ایرانی کمک می‌کند مشتری را بهتر بشناسند، تبلیغ را درست‌تر خرج کنند، و اثر تعامل را بسنجند — با سوئیت marTech و adTech.</p>
+        </div>
+        <div class="identity-logo">
+          <img class="brand-logo" src="../artifacts/smartech-logo.svg" alt="" />
         </div>
       </div>
-      <div class="identity-logo">
-        <img class="brand-logo" src="../artifacts/smartech-logo.svg" alt="" />
+      <div class="tech-pair">
+        <div class="box">
+          <strong>marTech</strong>
+          <p>تعامل، بخش‌بندی، اتوماسیون پیام و نگهداشت — عمدتاً اینترک</p>
+        </div>
+        <div class="box">
+          <strong>adTech</strong>
+          <p>انتساب نصب، اجرای رسانه، همکاری فروش — ادتریس، ادورج، افیلیو</p>
+        </div>
       </div>
     </section>
 
@@ -989,9 +1685,9 @@
         <div class="bench-block">
           <p class="bench-label">بنچ‌مارک‌های مرتبط</p>
           <div class="bench-row">
-          <img src="../artifacts/appsflyer-logo.svg" alt="AppsFlyer" />
-          <img src="../artifacts/webengage-logo.svg" alt="WebEngage" />
           <img src="../artifacts/moengage-logo.svg" alt="MoEngage" />
+          <img src="../artifacts/webengage-logo.svg" alt="WebEngage" />
+          <img src="../artifacts/appsflyer-logo.svg" alt="AppsFlyer" />
           </div>
         </div>
       </div>
@@ -1010,95 +1706,221 @@
     <section class="slide section-title" data-title="بخش-اقتصاد">
       <div class="section-head">
         <span class="badge">۰۵</span>
-        <h1>اقتصاد و سرمایه</h1>
+        <h1>اقتصاد و مدل مالی</h1>
       </div>
     </section>
 
-    <section class="slide" data-title="مدل-در-یک-جمله" data-section="۰۵ · اقتصاد و سرمایه">
-      <h2>کل مدل در یک جمله</h2>
-      <p class="model-lede">مدل نمی‌گوید «بسازید». می‌گوید: این چند چیز را در سه هفته ثابت کنید؛ اگر ثابت شد، هر مشتری سودده است و با حدود پنج مشتری کل خط جواب می‌دهد.</p>
-      <div class="grid">
-        <div class="num"><strong>۴۲٫۱ همت</strong><span>SAM سالانه — ۱۱ مرچنت بالای آستانه</span></div>
-        <div class="num"><strong>۱۷٬۰۴۰ م.ت</strong><span>سرمایه، با حاشیهٔ اطمینان ۲۰٪</span></div>
-        <div class="num"><strong>۸٫۹</strong><span>سقف مشتری هم‌زمان با تیم سه‌نفره</span></div>
-        <div class="num"><strong>۴٫۳</strong><span>مشتری لازم برای سربه‌سر در سال دوم</span></div>
+    <section class="slide split-module market-size" data-title="اندازه-بازار" data-section="۰۵ · اقتصاد و مدل مالی">
+      <div class="split-copy market-copy">
+        <h2>اندازه بازار</h2>
+        <div class="market-facts">
+          <div class="market-fact">
+            <strong>+۲٫۱ همت</strong>
+            <span>گردش مالی مورد نیاز برای مشتری ایده‌آل (ICP)</span>
+          </div>
+          <div class="market-fact">
+            <strong>۱۱</strong>
+            <span>مشتری واجد شرایط بالای آستانه‌ی مد نظر</span>
+          </div>
+          <div class="market-fact">
+            <strong>۴٫۴</strong>
+            <span>مشتری برای اینکه کل خط جواب بدهد</span>
+          </div>
+        </div>
       </div>
-      <p class="note">مدل مالی · سناریوی پایه · همه برآورد تیم</p>
+      <div class="split-visual" aria-hidden="true">
+        <svg class="market-rings" viewBox="0 0 420 420" role="img">
+          <!-- bottom tangent at (210, 400); radii 185 / 140 / 90 -->
+          <circle class="ring ring-1" cx="210" cy="215" r="185" />
+          <circle class="ring ring-2" cx="210" cy="260" r="140" />
+          <circle class="ring ring-3" cx="210" cy="310" r="90" />
+          <text class="ring-label" x="210" y="48">
+            <tspan class="ring-name" x="210" dy="0">TAM</tspan>
+            <tspan class="ring-val" x="210" dy="24">۳۹۴ میلیارد</tspan>
+          </text>
+          <text class="ring-label" x="210" y="140">
+            <tspan class="ring-name" x="210" dy="0">SAM</tspan>
+            <tspan class="ring-val" x="210" dy="24">۴۲٫۱ میلیارد</tspan>
+          </text>
+          <text class="ring-label" x="210" y="268">
+            <tspan class="ring-name" x="210" dy="0">SOM · در سال ۲</tspan>
+            <tspan class="ring-val" x="210" dy="24">۱۹٫۳ میلیارد</tspan>
+          </text>
+        </svg>
+      </div>
     </section>
 
-    <section class="slide" data-title="زنجیره-لایسنس" data-section="۰۵ · اقتصاد و سرمایه">
-      <h2>چطور لایسنس ساخته می‌شود</h2>
-      <p class="lede">لایسنس هر مشتری از یک زنجیرهٔ ضرب — از پایین به بالا.</p>
-      <div class="chain">
-        <div class="box">
-          <span class="mult">گردش مالی مرچنت بزرگ</span>
-          <strong>۶٫۲ همت</strong>
-          <p>× ۴٪ × ۷۰٪</p>
+    <section class="slide" data-title="زنجیره-فانل" data-section="۰۵ · اقتصاد و مدل مالی">
+      <div class="funnel-layout">
+        <!-- visual first in DOM → در RTL سمت راست -->
+        <div class="funnel-visual" aria-hidden="true">
+          <svg class="license-funnel" viewBox="0 0 640 440" role="img">
+            <!--
+              5-band truncated funnel: top (16,14)–(624,14), bottom (255,426)–(385,426)
+              half-width: 304 → 65; dividers at t=0.2 / 0.4 / 0.6 / 0.8
+            -->
+            <polygon class="funnel-outline" points="16,14 624,14 385,426 255,426" />
+            <!-- t=0.2 → y=96.4, half=256.2 -->
+            <line class="funnel-divider" x1="63.8" y1="96.4" x2="576.2" y2="96.4" />
+            <!-- t=0.4 → y=178.8, half=208.4 -->
+            <line class="funnel-divider" x1="111.6" y1="178.8" x2="528.4" y2="178.8" />
+            <!-- t=0.6 → y=261.2, half=160.6 -->
+            <line class="funnel-divider" x1="159.4" y1="261.2" x2="480.6" y2="261.2" />
+            <!-- t=0.8 → y=343.6, half=112.8 -->
+            <line class="funnel-divider" x1="207.2" y1="343.6" x2="432.8" y2="343.6" />
+
+            <!-- band 1 -->
+            <text class="funnel-value" x="320" y="42">۶٫۲ همت</text>
+            <text class="funnel-label" x="320" y="62">گردش مالی مرچنت بزرگ</text>
+            <foreignObject x="60" y="68" width="520" height="22">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="funnel-mult-html">
+                سهم مارکتینگ <bdi dir="ltr">۴٪</bdi>
+                <span> × </span>
+                سهم رسانه <bdi dir="ltr">۷۰٪</bdi>
+              </div>
+            </foreignObject>
+
+            <!-- band 2 -->
+            <text class="funnel-value" x="320" y="126">۱۷۴ میلیارد</text>
+            <text class="funnel-label" x="320" y="146">خرج تبلیغات سالانه</text>
+            <foreignObject x="60" y="152" width="520" height="22">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="funnel-mult-html">
+                عبوری <bdi dir="ltr">۳۰٪</bdi>
+              </div>
+            </foreignObject>
+
+            <!-- band 3 -->
+            <text class="funnel-value" x="320" y="208">۵۲٫۳ میلیارد</text>
+            <text class="funnel-label" x="320" y="228">بودجهٔ عبوری از حلقه</text>
+            <foreignObject x="60" y="234" width="520" height="22">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="funnel-mult-html">
+                نرخ حق اشتراک <bdi dir="ltr">۴٪</bdi>
+              </div>
+            </foreignObject>
+
+            <!-- band 4 -->
+            <text class="funnel-value" x="320" y="292">۲٫۰۹ میلیارد</text>
+            <text class="funnel-label" x="320" y="312">حق اشتراک سالانه</text>
+
+            <!-- band 5 -->
+            <text class="funnel-value" x="320" y="376"><tspan direction="ltr">۱٫۲٪</tspan></text>
+            <text class="funnel-label" x="320" y="398">از کل بودجه‌ی مارکتینگ</text>
+          </svg>
         </div>
-        <div class="box">
-          <span class="mult">خرج تبلیغات سالانه</span>
-          <strong>۱۷۴ میلیارد</strong>
-          <p>× ۳۰٪</p>
-        </div>
-        <div class="box">
-          <span class="mult">بودجهٔ عبوری از حلقه</span>
-          <strong>۵۲٫۳ میلیارد</strong>
-          <p>× ۴٪</p>
-        </div>
-        <div class="box">
-          <span class="mult">لایسنس سالانه</span>
-          <strong>۲٬۰۹۰ میلیون</strong>
-          <p>خروجی زنجیره</p>
+        <div class="funnel-copy">
+          <div>
+            <h2>حق اشتراک چطور محاسبه شده؟</h2>
+            <p class="lede">حق اشتراک هر مشتری از یک قیف ضرب — از گردش مالی تا قیمت سالانه.</p>
+          </div>
         </div>
       </div>
-      <div class="assumptions">
-        <div class="box">
-          <strong>۴٪ سهم بازاریابی</strong>
-          <p>گفتهٔ I-05، وزن پایین — حساس‌ترین ورودی کل مدل</p>
-        </div>
-        <div class="box">
-          <strong>۷۰٪ سهم رسانه</strong>
-          <p>فرض اثبات‌نشده، بدون منبع بیرونی</p>
-        </div>
-        <div class="box">
-          <strong>۳۰٪ عبوری</strong>
-          <p>فرض — کمپین‌هایی که دادهٔ اجرا به حلقه می‌رسد؛ پایلوت می‌سنجد</p>
-        </div>
-        <div class="box">
-          <strong>۴٪ نرخ لایسنس</strong>
-          <p>برآورد تیم، از سه لنگر مصاحبه و بنچمارک</p>
-        </div>
-      </div>
-      <p class="warn">۳۰٪ × ۴٪ = ۱٫۲٪ کل خرج تبلیغات. پرسش واقعی: آیا مشتری ۱٫۲٪ خرجش را برای این خط می‌پردازد؟</p>
     </section>
 
-    <section class="slide" data-title="ارزش-برای-مشتری" data-section="۰۵ · اقتصاد و سرمایه">
-      <h2>آیا برای مشتری می‌ارزد؟</h2>
-      <p class="threshold">بودجه‌ای که از حلقه عبور می‌کند باید دست‌کم <em>۴٪</em> بهتر خرج شود — با هزینهٔ استقرار و سرور، آستانه ≈ <em>۴٫۷٪</em>.</p>
-      <p class="note">مرچنت بزرگ: بودجهٔ عبوری ۵۲٫۳ میلیارد · لایسنس ۲٫۰۹ · هزینهٔ کل مالکیت ۲٫۴۷ میلیارد / سال</p>
-      <div class="scenarios">
-        <div class="box">
-          <span class="if">اگر بهبود ۱۵٪</span>
-          <strong>۳٫۲×</strong>
-          <p>ارزش ÷ هزینه — روشن می‌ارزد</p>
-        </div>
-        <div class="box">
-          <span class="if">اگر بهبود ۱۰٪</span>
-          <strong>۲٫۱×</strong>
-          <p>ارزش ÷ هزینه — می‌ارزد</p>
-        </div>
-        <div class="box">
-          <span class="if">اگر بهبود ۵٪</span>
-          <strong>۱٫۱×</strong>
-          <p>ارزش ÷ هزینه — به‌زحمت</p>
-        </div>
-        <div class="box weak">
-          <span class="if">اگر بهبود ۲٪</span>
-          <strong>۰٫۴×</strong>
-          <p>ارزش ÷ هزینه — نمی‌ارزد</p>
+    <!-- نسخه بصری «آیا برای مشتری می‌ارزد؟» — متن بالا، چارت بزرگ پایین -->
+    <section class="slide" data-title="ارزش-چارت" data-section="۰۵ · اقتصاد و مدل مالی">
+      <div class="value-copy">
+        <h2>آیا برای مشتری می‌ارزد؟</h2>
+        <p class="threshold">بودجه‌ای که از حلقه عبور می‌کند باید دست‌کم <em>۴٪</em> (و با احتساب هزینهٔ استقرار و سرور <em>۴٫۷٪</em>) بهتر خرج شود.</p>
+        <p class="threshold">گودال هزینه‌ای ما در ماه <em>۱۷</em> اتفاق می‌افتد که حدود <em>۲۱ میلیارد تومان</em> با حاشیهٔ اطمینان <em>۲۰٪</em> است.</p>
+      </div>
+      <div class="value-visual">
+        <div class="vc-chart-wrap">
+          <svg class="vc-chart" viewBox="0 0 1220 400" role="img" aria-label="نمودار به‌صرفه‌گی در برابر درصد بهبود">
+            <!-- plot: x 100–1080, y 36–290 (h=254), max=3.5 → y = 290 - v/3.5*254 -->
+            <line class="grid-line" x1="100" y1="217.4" x2="1080" y2="217.4" />
+            <line class="grid-line" x1="100" y1="144.9" x2="1080" y2="144.9" />
+            <line class="grid-line" x1="100" y1="72.3" x2="1080" y2="72.3" />
+            <line class="grid-line" x1="100" y1="36" x2="1080" y2="36" />
+
+            <text class="tick-y" x="86" y="294">&#x200E;۰×</text>
+            <text class="tick-y" x="86" y="221">&#x200E;۱×</text>
+            <text class="tick-y" x="86" y="149">&#x200E;۲×</text>
+            <text class="tick-y" x="86" y="76">&#x200E;۳×</text>
+
+            <!-- breakeven 1× → y = 290 - 254/3.5 = 217.4؛ برچسب بیرون از محدودهٔ میله‌ها -->
+            <line class="breakeven" x1="100" y1="217.4" x2="1080" y2="217.4" />
+            <text class="be-label" x="1090" y="212" text-anchor="start" direction="ltr">نقطه‌ی سربه‌سر</text>
+
+            <!-- centers 220 / 460 / 700 / 940; bar w=160 · × داخل بالای میله · بهبود زیر -->
+            <rect class="bar weak" x="140" y="261" width="160" height="29" />
+            <text class="bar-label" x="220" y="281" direction="ltr">&#x200E;۰٫۴×</text>
+            <text class="tick" x="220" y="318">بهبود ۲٪</text>
+            <text class="verdict bad" x="220" y="340">نمی‌ارزد</text>
+
+            <rect class="bar tight" x="380" y="210.2" width="160" height="79.8" />
+            <text class="bar-label" x="460" y="234" direction="ltr">&#x200E;۱٫۱×</text>
+            <text class="tick" x="460" y="318">بهبود ۵٪</text>
+            <text class="verdict" x="460" y="340">به‌زحمت</text>
+
+            <rect class="bar" x="620" y="137.6" width="160" height="152.4" />
+            <text class="bar-label" x="700" y="162" direction="ltr">&#x200E;۲٫۱×</text>
+            <text class="tick" x="700" y="318">بهبود ۱۰٪</text>
+            <text class="verdict" x="700" y="340">می‌ارزد</text>
+
+            <rect class="bar" x="860" y="57.8" width="160" height="232.2" />
+            <text class="bar-label" x="940" y="82" direction="ltr">&#x200E;۳٫۲×</text>
+            <text class="tick" x="940" y="318">بهبود ۱۵٪</text>
+            <text class="verdict" x="940" y="340">روشن می‌ارزد</text>
+
+            <line class="axis-line" x1="100" y1="290" x2="1080" y2="290" />
+            <line class="axis-line" x1="100" y1="36" x2="100" y2="290" />
+
+            <text class="axis-title" x="590" y="380" text-anchor="middle">درصد بهبود خرج بودجهٔ عبوری</text>
+            <text class="axis-title" x="32" y="163" text-anchor="middle" transform="rotate(-90 32 163)">به‌صرفه‌گی (ارزش ÷ هزینه)</text>
+          </svg>
         </div>
       </div>
-      <p class="warn">هیچ‌کدام از این بهبودها هنوز اندازه‌گیری نشده — پایلوت باید نشان دهد (فرضیهٔ A3-08).</p>
+    </section>
+
+    <!-- ۰۶ فاز اجرایی — نقشهٔ راه (انتهای مسیر) -->
+    <section class="slide section-title" data-title="بخش-فاز-اجرایی">
+      <div class="section-head">
+        <span class="badge">۰۶</span>
+        <h1>فاز اجرایی</h1>
+      </div>
+    </section>
+
+    <section class="slide" data-title="نقشهراه" data-section="۰۶ · فاز اجرایی">
+      <h2>نقشهٔ راه ساخت</h2>
+      <p class="gantt-note">هر واحد روی محور افقی = یک ماه تقویمی. ساخت فقط بعد از عبور چهار گیت (ورود مشروط).</p>
+      <div class="gantt" aria-label="گانت نقشه راه" style="--m: 17;">
+        <div class="gantt-rows">
+          <!-- 3 weeks ≈ 0.75 month; releases at M4 / M9 / M17 -->
+          <div class="gantt-row">
+            <div class="gantt-bar pilot" style="left: 0%; width: calc(0.75 / 17 * 100%);" title="۳ هفته">
+              <span class="pilot-label">ورود مشروط · ۳ هفته</span>
+            </div>
+          </div>
+          <div class="gantt-row">
+            <div class="gantt-bar" style="left: calc(0.75 / 17 * 100%); width: calc(3.25 / 17 * 100%);">
+              راستی‌آزما
+            </div>
+          </div>
+          <div class="gantt-row">
+            <div class="gantt-bar" style="left: calc(4 / 17 * 100%); width: calc(5 / 17 * 100%);">
+              طراح کمپین
+            </div>
+          </div>
+          <div class="gantt-row">
+            <div class="gantt-bar" style="left: calc(9 / 17 * 100%); width: calc(8 / 17 * 100%);">
+              شبیه‌ساز
+            </div>
+          </div>
+        </div>
+        <div class="gantt-axis" aria-hidden="true">
+          <div class="gantt-tick" style="left: 0%"><span>شروع</span></div>
+          <div class="gantt-tick milestone" style="left: calc(4 / 17 * 100%)"><span>ماه ۴</span></div>
+          <div class="gantt-tick milestone" style="left: calc(9 / 17 * 100%)"><span>ماه ۹</span></div>
+          <div class="gantt-tick" style="left: calc(12 / 17 * 100%)"><span>۱۲</span></div>
+          <div class="gantt-tick milestone" style="left: 100%"><span>ماه ۱۷</span></div>
+        </div>
+        <div class="gantt-legend">
+          <span><strong>فاز ۱</strong> راستی‌آزما · ۳۰٪ قیمت · ۱۴٫۳ نفر-ماه</span>
+          <span><strong>فاز ۲</strong> طراح · ۷۵٪ تجمعی · ۱۸ نفر-ماه</span>
+          <span><strong>فاز ۳</strong> شبیه‌ساز · ۱۰۰٪ · ۲۰ نفر-ماه</span>
+        </div>
+      </div>
+      <p class="note">عرضه از ارزان‌ترین و مستقل‌ترین فاز؛ هر فاز جدا فروخته می‌شود. · گزارش ۶.۱، ۶.۳، ۱۰.۲</p>
     </section>
 
   </div>
