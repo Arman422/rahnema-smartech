@@ -1176,7 +1176,7 @@
       flex: 0.7;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       gap: 1.25rem;
       min-width: 0;
       padding: clamp(2.5rem, 6vh, 4.5rem) clamp(1.75rem, 4.5vw, 3.75rem) clamp(2rem, 4vh, 3rem);
@@ -1192,6 +1192,13 @@
       font-size: clamp(1.02rem, 1.45vw, 1.18rem);
       font-weight: 600;
       line-height: 1.7;
+    }
+    .slide[data-title="زنجیره-فانل"] .funnel-copy .bench-block {
+      max-width: 34ch;
+    }
+    .slide[data-title="زنجیره-فانل"] .bench-row img {
+      height: calc(3.825rem * 0.7);
+      max-width: calc(15rem * 0.7);
     }
     .funnel-notes {
       display: flex;
@@ -1557,16 +1564,16 @@
       </div>
     </section>
 
-    <!-- ۰۲ مساله و شواهد — پل اسمارتک → پیشنهاد -->
-    <section class="slide section-title" data-title="بخش-مساله-شواهد">
+    <!-- ۰۲ خط کسب‌وکار — مسئله + حلقه سهفاز -->
+    <section class="slide section-title" data-title="بخش-خط-کسبوکار">
       <div class="section-head">
         <span class="badge">۰۲</span>
-        <h1>مساله و شواهد</h1>
+        <h1>خط کسب‌وکار</h1>
       </div>
     </section>
 
-    <section class="slide split-module" data-title="از-اجرا-به-تصمیم" data-section="۰۲ · مساله و شواهد">
-      <!-- visual first in DOM → در RTL سمت راست (برعکس اسلایدهای پیشنهاد) -->
+    <section class="slide split-module" data-title="از-اجرا-به-تصمیم" data-section="۰۲ · خط کسب‌وکار">
+      <!-- visual first in DOM → در RTL سمت راست (برعکس اسلایدهای ماژول) -->
       <div class="split-visual" aria-hidden="true">
         <div class="loop-chart" data-active="all">
           <svg class="loop-ring" viewBox="0 0 300 300">
@@ -1597,14 +1604,7 @@
       </div>
     </section>
 
-    <section class="slide section-title" data-title="بخش-پیشنهاد">
-      <div class="section-head">
-        <span class="badge">۰۴</span>
-        <h1>پیشنهاد</h1>
-      </div>
-    </section>
-
-    <section class="slide split-module" data-title="طراح-کمپین" data-section="۰۴ · پیشنهاد">
+    <section class="slide split-module" data-title="طراح-کمپین" data-section="۰۲ · خط کسب‌وکار">
       <div class="split-copy">
         <div class="module-head">
           <img class="module-icon" src="../artifacts/icon-designer.svg" alt="" />
@@ -1637,7 +1637,7 @@
       </div>
     </section>
 
-    <section class="slide split-module" data-title="شبیهساز" data-section="۰۴ · پیشنهاد">
+    <section class="slide split-module" data-title="شبیهساز" data-section="۰۲ · خط کسب‌وکار">
       <div class="split-copy">
         <div class="module-head">
           <img class="module-icon" src="../artifacts/icon-simulator.svg" alt="" />
@@ -1670,7 +1670,7 @@
       </div>
     </section>
 
-    <section class="slide split-module" data-title="راستیآزمای" data-section="۰۴ · پیشنهاد">
+    <section class="slide split-module" data-title="راستیآزمای" data-section="۰۲ · خط کسب‌وکار">
       <div class="split-copy">
         <div class="module-head">
           <img class="module-icon" src="../artifacts/icon-verifier.svg" alt="" />
@@ -1705,12 +1705,12 @@
 
     <section class="slide section-title" data-title="بخش-اقتصاد">
       <div class="section-head">
-        <span class="badge">۰۵</span>
+        <span class="badge">۰۳</span>
         <h1>اقتصاد و مدل مالی</h1>
       </div>
     </section>
 
-    <section class="slide split-module market-size" data-title="اندازه-بازار" data-section="۰۵ · اقتصاد و مدل مالی">
+    <section class="slide split-module market-size" data-title="اندازه-بازار" data-section="۰۳ · اقتصاد و مدل مالی">
       <div class="split-copy market-copy">
         <h2>اندازه بازار</h2>
         <div class="market-facts">
@@ -1750,7 +1750,7 @@
       </div>
     </section>
 
-    <section class="slide" data-title="زنجیره-فانل" data-section="۰۵ · اقتصاد و مدل مالی">
+    <section class="slide" data-title="زنجیره-فانل" data-section="۰۳ · اقتصاد و مدل مالی">
       <div class="funnel-layout">
         <!-- visual first in DOM → در RTL سمت راست -->
         <div class="funnel-visual" aria-hidden="true">
@@ -1812,12 +1812,19 @@
             <h2>حق اشتراک چطور محاسبه شده؟</h2>
             <p class="lede">حق اشتراک هر مشتری از یک قیف ضرب — از گردش مالی تا قیمت سالانه.</p>
           </div>
+          <div class="bench-block">
+            <p class="bench-label">بنچ‌مارک‌های مرتبط</p>
+            <div class="bench-row">
+              <img src="../artifacts/braze-logo.svg" alt="Braze" />
+              <img src="../artifacts/helium10-logo.svg" alt="Helium 10" />
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- نسخه بصری «آیا برای مشتری می‌ارزد؟» — متن بالا، چارت بزرگ پایین -->
-    <section class="slide" data-title="ارزش-چارت" data-section="۰۵ · اقتصاد و مدل مالی">
+    <section class="slide" data-title="ارزش-چارت" data-section="۰۳ · اقتصاد و مدل مالی">
       <div class="value-copy">
         <h2>آیا برای مشتری می‌ارزد؟</h2>
         <p class="threshold">بودجه‌ای که از حلقه عبور می‌کند باید دست‌کم <em>۴٪</em> (و با احتساب هزینهٔ استقرار و سرور <em>۴٫۷٪</em>) بهتر خرج شود.</p>
@@ -1872,15 +1879,15 @@
       </div>
     </section>
 
-    <!-- ۰۶ فاز اجرایی — نقشهٔ راه (انتهای مسیر) -->
+    <!-- ۰۴ فاز اجرایی — نقشهٔ راه (انتهای مسیر) -->
     <section class="slide section-title" data-title="بخش-فاز-اجرایی">
       <div class="section-head">
-        <span class="badge">۰۶</span>
+        <span class="badge">۰۴</span>
         <h1>فاز اجرایی</h1>
       </div>
     </section>
 
-    <section class="slide" data-title="نقشهراه" data-section="۰۶ · فاز اجرایی">
+    <section class="slide" data-title="نقشهراه" data-section="۰۴ · فاز اجرایی">
       <h2>نقشهٔ راه ساخت</h2>
       <p class="gantt-note">هر واحد روی محور افقی = یک ماه تقویمی. ساخت فقط بعد از عبور چهار گیت (ورود مشروط).</p>
       <div class="gantt" aria-label="گانت نقشه راه" style="--m: 17;">
