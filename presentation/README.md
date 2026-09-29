@@ -19,7 +19,7 @@ presentation/
   README.md            ← این فایل
   argument-chain.md    ← زنجیره ۹ حلقه — فارسی ساده، بدون جدول (خواناتر در Cursor)
   outline.md           ← اسکلت روایت، بخش‌ها، تمرکز، ضدالگوها
-  script-draft.md      ← (بعداً) متن گفتاری دقیقه‌به‌دقیقه
+  rehearsal/           ← اسکریپت rehearsal بخش‌به‌بخش + چک‌لیست
   slides/              ← فایل ارائه (ترجیح: HTML تک‌فایل؛ PDF خروجی)
   artifacts/           ← نمودارها، اسکرین‌شات، استخراج جدول از مدل مالی
   appendix/             ← اسلایدهای پشتیبان Q&A (وارد هسته نمی‌شوند)
@@ -34,7 +34,8 @@ presentation/
 - [x] اسکلت روایت (`outline.md`)
 - [x] زمان جلسه: ۱۵ دقیقه
 - [x] زنجیره استدلال (`argument-chain.md`)
-- [x] فهرست اسلاید قفل (`slides/outline-slide-list.md`)
-- [x] نسخه اولیه HTML (`slides/index.html`) — ۹ اسلاید
-- [ ] rehearsal + کرنومتر دمو (سقف ۳ دقیقه)
+- [x] فهرست اسلاید قفل (`slides/outline-slide-list.md`) — ۵ بخش
+- [x] نسخه HTML (`slides/index.html`) — عنوان‌بخش ۰۱–۰۵
+- [x] rehearsal بخش‌به‌بخش (`rehearsal/`)
+- [ ] rehearsal زنده با کرنومتر دمو (سقف ۳ دقیقه)
 - [ ] بهبود ظاهر اسلایدبه اسلاید (Pitch یا HTML)

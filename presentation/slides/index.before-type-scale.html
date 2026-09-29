@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>دفاع — ورود مشروط به Campaign Loop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* Pitch GTM; section-title = RTL-flipped divider (badge right of title). No blobs. */
+    :root {
+      --blue: #2e47f5;
+      --blue-badge: #e5e9ff;
+      --ink: #1c2434;
+      --muted: #5c6578;
+      --line: rgba(46, 71, 245, 0.12);
+      --card: #ffffff;
+      --bg: #ffffff;
+      --warn: #c2410c;
+      --shadow: 0 12px 36px rgba(40, 55, 120, 0.08);
+      --nav: #c5cad6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Vazirmatn", system-ui, sans-serif;
+      overflow: hidden;
+    }
+
+    .deck { height: 100%; width: 100%; position: relative; }
+
+    .slide {
+      display: none;
+      position: relative;
+      height: 100%;
+      padding: clamp(1.75rem, 4.5vw, 3.5rem) clamp(1.75rem, 5.5vw, 4.75rem) 3.75rem;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.15rem;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+    .slide.active { display: flex; }
+
+    .slide.center {
+      align-items: center;
+      text-align: center;
+    }
+    .slide.center h1 {
+      max-width: 18ch;
+      font-size: clamp(2.4rem, 5vw, 3.8rem); /* ~20% بزرگ‌تر از h1 پایه */
+    }
+    .slide.center .lede,
+    .slide.center .team { max-width: 36ch; }
+
+    /* Full section-title slide (divider only) */
+    .slide.section-title {
+      align-items: flex-start;
+      justify-content: center;
+      max-width: none;
+      padding-inline: clamp(2.5rem, 10vw, 8rem);
+    }
+    .slide.section-title .section-head { gap: 2rem; }
+    .slide.section-title .section-head h1 {
+      font-size: clamp(3.36rem, 7.7vw, 5.6rem);
+      max-width: none;
+      margin: 0;
+    }
+    .slide.section-title .badge {
+      width: 6.2rem;
+      height: 6.2rem;
+      font-size: 2.1rem;
+    }
+
+    /* Badge RIGHT of title in RTL: DOM order badge → title */
+    .section-head {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .badge {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.55rem;
+      height: 2.55rem;
+      border-radius: 50%;
+      background: var(--blue-badge);
+      color: var(--blue);
+      font-size: 0.95rem;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .brand-logo {
+      width: clamp(4.5rem, 9vw, 6.5rem);
+      height: auto;
+      display: block;
+    }
+
+    h1, h2 {
+      font-weight: 800;
+      line-height: 1.3;
+      color: var(--blue);
+      margin: 0;
+    }
+    h1 { font-size: clamp(2rem, 4.2vw, 3.15rem); max-width: 18ch; }
+    h2 { font-size: clamp(1.45rem, 2.8vw, 2.1rem); max-width: 24ch; }
+
+    .lede {
+      font-size: clamp(1.05rem, 1.55vw, 1.22rem);
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 42ch;
+      font-weight: 500;
+    }
+
+    ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      font-size: clamp(1rem, 1.4vw, 1.12rem);
+      line-height: 1.65;
+      max-width: 50ch;
+      color: var(--ink);
+      font-weight: 500;
+    }
+    ul li { position: relative; padding-right: 1.1rem; }
+    ul li::before {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 0.72em;
+      width: 0.42rem;
+      height: 0.42rem;
+      border-radius: 50%;
+      background: var(--blue);
+    }
+
+    .team {
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.7;
+      max-width: 40ch;
+      font-weight: 500;
+    }
+    .meta {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--blue);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 0.5rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 0.75rem;
+      width: 100%;
+      max-width: 940px;
+    }
+    .num, .box {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 1rem 1.05rem;
+      box-shadow: var(--shadow);
+    }
+    .num strong {
+      display: block;
+      font-size: clamp(1.3rem, 2.1vw, 1.7rem);
+      color: var(--blue);
+      font-weight: 800;
+      margin-bottom: 0.25rem;
+    }
+    .num span, .box p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.45;
+      font-weight: 500;
+    }
+    .box strong {
+      display: block;
+      margin-bottom: 0.35rem;
+      font-size: 1rem;
+      color: var(--blue);
+      font-weight: 800;
+    }
+
+    .warn {
+      border-right: 3px solid var(--warn);
+      padding-right: 0.9rem;
+      color: var(--warn);
+      font-weight: 700;
+      font-size: 1.02rem;
+      line-height: 1.55;
+      max-width: 48ch;
+    }
+    .demo {
+      margin-top: 0.2rem;
+      padding: 0.95rem 1.15rem;
+      border: 1.5px dashed color-mix(in srgb, var(--blue) 55%, white);
+      border-radius: 16px;
+      color: var(--blue);
+      font-weight: 700;
+      max-width: 42ch;
+      background: #f7f8ff;
+    }
+    .phases { display: flex; flex-wrap: wrap; gap: 0.55rem; }
+    .phases span {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.45rem 0.95rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--blue);
+      box-shadow: 0 8px 24px rgba(46, 71, 245, 0.08);
+    }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.6rem;
+      width: 100%;
+      max-width: 980px;
+    }
+    @media (max-width: 860px) {
+      .flow { grid-template-columns: 1fr 1fr; }
+    }
+    .flow .box { min-height: 8rem; }
+    .flow .kill {
+      color: var(--warn);
+      font-size: 0.8rem;
+      margin-top: 0.45rem;
+      font-weight: 700;
+    }
+
+    .footer {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 5;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.7rem 1.2rem;
+      font-size: 0.76rem;
+      color: var(--muted);
+      border-top: 1px solid rgba(46, 71, 245, 0.08);
+      background: rgba(255, 255, 255, 0.92);
+    }
+    #sectionLabel {
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.01em;
+      min-height: 1.2em;
+    }
+    #sectionLabel:empty { visibility: hidden; }
+    .footer-end {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      margin-inline-start: auto;
+    }
+    .footer-keys {
+      display: none;
+      gap: 0.35rem;
+      align-items: center;
+    }
+    body.show-keys .footer-keys { display: inline-flex; }
+    .footer button.key {
+      font-family: inherit;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 0.08rem 0.4rem;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 0.76rem;
+      cursor: pointer;
+      line-height: 1.4;
+    }
+    .footer button.key:hover {
+      border-color: var(--blue);
+      background: var(--blue-badge);
+    }
+
+    @media print {
+      .footer { display: none; }
+      .slide {
+        display: flex !important;
+        page-break-after: always;
+        height: 100vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck" id="deck">
+
+    <section class="slide active center" data-title="عنوان">
+      <img class="brand-logo" src="../artifacts/smartech-logo.svg" alt="Smartech" />
+      <h1>پروژه پایانی اسمارتک</h1>
+      <p class="lede">پیشنهاد خط کسب‌وکار جدید · اسمارتک کمپین لوپ</p>
+      <p class="team">
+        مهدی اکبری · آرمان خیراندیش · امیررضا طاهری · محسن علیپور · جواد قلی‌زاده
+      </p>
+      <p class="meta">Rahnema · PM Bootcamp · Cohort 05</p>
+    </section>
+
+    <!-- جمله باز — قبل از بخش‌ها؛ بخش جدا نیست -->
+    <section class="slide" data-title="تصمیم">
+      <div class="section-head">
+        <span class="badge">—</span>
+        <h2>ورود مشروط به Campaign Loop</h2>
+      </div>
+      <p class="lede">میفروشد کیفیت تصمیم کمپین را — نه اندازهگیری و نه اجرا.</p>
+      <ul>
+        <li>ساخت فقط بعد از چهار گیت، پیش از هر خط کد</li>
+        <li>سرمایه مرحلهای است — جزئیات در بخش اقتصاد و سرمایه</li>
+      </ul>
+    </section>
+
+    <section class="slide section-title" data-title="بخش-فضا">
+      <div class="section-head">
+        <span class="badge">۰۱</span>
+        <h1>فضا</h1>
+      </div>
+    </section>
+
+    <section class="slide" data-title="اسمارتک" data-section="۰۱ · فضا">
+      <div class="section-head">
+        <span class="badge">۰۱</span>
+        <h2>اسمارتک امروز چه میفروشد؟</h2>
+      </div>
+      <ul>
+        <li>اندازهگیری عملکرد تبلیغات و رفتار بعد از نصب</li>
+        <li>اجرای تبلیغات دیجیتال و کانالهای مرتبط</li>
+        <li>لنگر آشناتر برای بسیاری: ادتریس</li>
+      </ul>
+      <p class="lede">یک جمله برای این دفاع کافی است: امروز اندازه و اجرا — خلأ مجاور کیفیت تصمیم است.</p>
+    </section>
+
+    <section class="slide section-title" data-title="بخش-مسئله">
+      <div class="section-head">
+        <span class="badge">۰۲</span>
+        <h1>مسئله و شواهد</h1>
+      </div>
+    </section>
+
+    <section class="slide" data-title="مشتری-مسئله" data-section="۰۲ · مسئله و شواهد">
+      <div class="section-head">
+        <span class="badge">۰۲</span>
+        <h2>خریدار = صاحب بودجه تبلیغات</h2>
+      </div>
+      <ul>
+        <li>ICP: اپ ایرانی با تبلیغات پولی مستمر + SDK فعال؛ آستانه ≥ ۲٫۱ همت (از اقتصاد واحد)</li>
+        <li>مسئله: ۴–۵ ساعت چسباندن دستی داده؛ وقتی نتیجه نمیخواند علت نامعلوم است → بودجه بعد با حدس (آی-۰۴)</li>
+        <li>جایگزین امروز: اکسل و ابزار رایگان — نه «نبود ابزار»</li>
+        <li>شاهد مخالف (آی-۰۱، وزن بالا): «ابزار اوکیه، بیزنسلاین نه»</li>
+      </ul>
+      <p class="warn">بزرگترین ضعف: صفر مصاحبه با صاحب بودجه — قیمت و بسته روی حدس است. شدت مسئله هم اندازهگیری نشده.</p>
+    </section>
+
+    <section class="slide section-title" data-title="بخش-پیشنهاد">
+      <div class="section-head">
+        <span class="badge">۰۳</span>
+        <h1>پیشنهاد</h1>
+      </div>
+    </section>
+
+    <section class="slide" data-title="حق-ورود" data-section="۰۳ · پیشنهاد">
+      <div class="section-head">
+        <span class="badge">۰۳</span>
+        <h2>حق ورود از هوش مصنوعی نیست</h2>
+      </div>
+      <ul>
+        <li>از دسترسی همزمان به طرح + اجرا + نتیجه است، با اعتماد انباشته</li>
+        <li>پیشنهاد ما خط مستقل است، نه فیچر روی ادتریس</li>
+        <li>اگر گیتها رد شوند: مسیر جایگزین = قابلیت روی ادتریس (آی-۰۱ حذف نشده، شاخه شده)</li>
+      </ul>
+    </section>
+
+    <section class="slide" data-title="حلقه" data-section="۰۳ · پیشنهاد">
+      <div class="section-head">
+        <span class="badge">۰۳</span>
+        <h2>یک حلقه، سه فاز</h2>
+      </div>
+      <div class="phases">
+        <span>طراح کمپین</span>
+        <span>شبیهساز</span>
+        <span>راستیآزمای</span>
+      </div>
+      <ul>
+        <li>جدا فروخته میشوند؛ بسته کامل ۲۳٪ ارزانتر از خرید تکهتکه</li>
+        <li>موتور قطعی و قابل حسابرسی زیر؛ AI فقط روایت میکند — حق ساختن عدد ندارد</li>
+      </ul>
+      <p class="demo">اینجا پروتوتایپ — سقف ۳ دقیقه · دمو ≠ اثبات تقاضا یا قیمت</p>
+    </section>
+
+    <section class="slide section-title" data-title="بخش-اقتصاد">
+      <div class="section-head">
+        <span class="badge">۰۴</span>
+        <h1>اقتصاد و سرمایه</h1>
+      </div>
+    </section>
+
+    <section class="slide" data-title="اقتصاد" data-section="۰۴ · اقتصاد و سرمایه">
+      <div class="section-head">
+        <span class="badge">۰۴</span>
+        <h2>چند عدد کلیدی</h2>
+      </div>
+      <div class="grid">
+        <div class="num"><strong>۲۰۹۰ م.ت</strong><span>لایسنس بزرگ / سال</span></div>
+        <div class="num"><strong>۷۶٪</strong><span>حاشیه مشارکت</span></div>
+        <div class="num"><strong>۴٫۳</strong><span>مشتری برای سربهسر</span></div>
+        <div class="num"><strong>۸٫۹</strong><span>سقف تحویل همزمان</span></div>
+        <div class="num"><strong>۴۲٫۱ همت</strong><span>SAM پایینبهبالا (بالای ICP)</span></div>
+      </div>
+      <p class="lede">رشد را ظرفیت تحویل میبندد، نه رویای تقاضا.</p>
+    </section>
+
+    <section class="slide section-title" data-title="بخش-ورود-مشروط">
+      <div class="section-head">
+        <span class="badge">۰۵</span>
+        <h1>ورود مشروط</h1>
+      </div>
+    </section>
+
+    <section class="slide" data-title="ورود" data-section="۰۵ · ورود مشروط">
+      <div class="section-head">
+        <span class="badge">۰۵</span>
+        <h2>پیشروی با معیار کشتن</h2>
+      </div>
+      <div class="flow">
+        <div class="box">
+          <strong>۱ · گیتها</strong>
+          <p>داده · خریدار · بازار · پیشبینی مکتوب</p>
+          <p class="kill">رد → توقف یا بازنویسی درآمد</p>
+        </div>
+        <div class="box">
+          <strong>۲ · فاز ۱</strong>
+          <p>عرضه قابلفروش (ورود دستی پیشبینی)</p>
+          <p class="kill">مشروط به عبور گیتها ≈ ۲۰۷۰ م.ت</p>
+        </div>
+        <div class="box">
+          <strong>۳ · پایلوت</strong>
+          <p>۳ شرکت · معیار عددی · قاعده توقف</p>
+          <p class="kill">تعویق = ادامه پنهان نیست</p>
+        </div>
+        <div class="box">
+          <strong>۴ · فاز ۲/۳ یا شاخه</strong>
+          <p>تکمیل حلقه تا سقف ۱۷۰۴۰ م.ت</p>
+          <p class="kill">یا قابلیت روی ادتریس</p>
+        </div>
+      </div>
+      <ul>
+        <li>گیتها ≈ ۱۵۰ م.ت · اولین سود عملیاتی ماه ۱۹ · جمع سال ۲ هنوز منفی</li>
+        <li>هیچ مرحلهای پیش از نتیجه مرحله قبل شروع نمیشود</li>
+      </ul>
+    </section>
+
+    <section class="slide" data-title="بسته" data-section="۰۵ · ورود مشروط">
+      <div class="section-head">
+        <span class="badge">۰۵</span>
+        <h2>آنچه هنوز نمیدانیم</h2>
+      </div>
+      <ul>
+        <li>تمایل به پرداخت صاحب بودجه در مرتبه قیمت ما</li>
+        <li>شدت و فراوانی واقعی مسئله در میدان</li>
+        <li>آیا خط مستقل زنده میماند، یا شاخه قابلیت روی ادتریس</li>
+      </ul>
+      <p class="lede">تصمیم پیشنهادی: ورود مشروط — با گیت، نه با شعار. سپاس از توجه شما.</p>
+    </section>
+
+  </div>
+
+  <div class="footer">
+    <span id="sectionLabel" aria-live="polite"></span>
+    <span class="footer-end">
+      <span id="counter">۱ / ۱۴</span>
+      <span class="footer-keys">
+        <button type="button" class="key" id="navPrev" title="قبلی" aria-label="قبلی">→</button>
+        <button type="button" class="key" id="navNext" title="بعدی" aria-label="بعدی">←</button>
+        <button type="button" class="key" id="navFs" title="تمام‌صفحه" aria-label="تمام‌صفحه">F</button>
+      </span>
+    </span>
+  </div>
+
+  <script>
+    const slides = [...document.querySelectorAll(".slide")];
+    const counter = document.getElementById("counter");
+    const sectionLabel = document.getElementById("sectionLabel");
+    let i = 0;
+
+    function show(n) {
+      i = Math.max(0, Math.min(slides.length - 1, n));
+      slides.forEach((s, idx) => s.classList.toggle("active", idx === i));
+      counter.textContent = (i + 1) + " / " + slides.length;
+      sectionLabel.textContent = slides[i].dataset.section || "";
+      location.hash = String(i + 1);
+    }
+
+    function toggleFs() {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+
+    function toggleKeys() {
+      document.body.classList.toggle("show-keys");
+    }
+
+    document.getElementById("navNext").addEventListener("click", (e) => {
+      e.stopPropagation();
+      show(i + 1);
+    });
+    document.getElementById("navPrev").addEventListener("click", (e) => {
+      e.stopPropagation();
+      show(i - 1);
+    });
+    document.getElementById("navFs").addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleFs();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft" || e.key === " " || e.key === "PageDown") {
+        e.preventDefault();
+        show(i + 1);
+      }
+      if (e.key === "ArrowRight" || e.key === "PageUp") show(i - 1);
+      if (e.key === "Home") show(0);
+      if (e.key === "End") show(slides.length - 1);
+      if (e.key === "f" || e.key === "F") toggleFs();
+      if (e.key === "k" || e.key === "K") toggleKeys();
+    });
+
+    document.getElementById("deck").addEventListener("click", (e) => {
+      if (e.target.closest("a,button")) return;
+      if (e.clientX > window.innerWidth / 2) show(i - 1);
+      else show(i + 1);
+    });
+
+    if (new URLSearchParams(location.search).has("keys")) {
+      document.body.classList.add("show-keys");
+    }
+
+    const fromHash = parseInt(location.hash.replace("#", ""), 10);
+    show(Number.isFinite(fromHash) && fromHash > 0 ? fromHash - 1 : 0);
+  </script>
+</body>
+</html>

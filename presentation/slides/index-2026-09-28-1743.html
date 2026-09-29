@@ -171,39 +171,11 @@
       gap: 0.85rem;
     }
     .brand-row .brand-logo {
-      width: clamp(3.8rem, 7.5vw, 5.25rem);
+      width: clamp(2.8rem, 5vw, 3.6rem);
     }
     .brand-row h2 {
       max-width: none;
       font-size: clamp(1.8rem, 3.4vw, 2.6rem);
-    }
-    /* هویت: متن راست، لوگو چپِ باکس اصلی */
-    .slide[data-title="هویت-جایگاه"] {
-      flex-direction: row;
-      align-items: center;
-      gap: clamp(1.5rem, 4vw, 3.5rem);
-    }
-    .slide[data-title="هویت-جایگاه"] .identity-copy {
-      flex: 1.15;
-      display: flex;
-      flex-direction: column;
-      gap: 1.15rem;
-      min-width: 0;
-    }
-    .slide[data-title="هویت-جایگاه"] .identity-copy h2 {
-      max-width: none;
-      font-size: clamp(1.8rem, 3.4vw, 2.6rem);
-    }
-    .slide[data-title="هویت-جایگاه"] .identity-logo {
-      flex: 0.85;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 0;
-    }
-    .slide[data-title="هویت-جایگاه"] .identity-logo .brand-logo {
-      width: clamp(9rem, 22vw, 16rem);
-      height: auto;
     }
     /* Module slides: text | gray visual with loop — desktop landscape only */
     .slide.split-module {
@@ -262,13 +234,6 @@
       border-top: 1px solid var(--line);
       margin-top: 0.15rem;
       padding-top: 1rem;
-    }
-    .slide[data-title="از-اجرا-به-تصمیم"] .split-copy .lede,
-    .slide[data-title="از-اجرا-به-تصمیم"] .split-copy ul {
-      max-width: none;
-    }
-    .slide[data-title="از-اجرا-به-تصمیم"] .split-copy {
-      justify-content: center;
     }
     .bench-block {
       margin-top: auto;
@@ -333,10 +298,6 @@
       stroke-width: 3.5;
       opacity: 0.85;
     }
-    .loop-chart[data-active="all"] .ring-base {
-      stroke: var(--blue);
-      opacity: 1;
-    }
     .loop-node {
       position: absolute;
       width: 6.9rem;
@@ -367,8 +328,7 @@
     .loop-node.node-verifier { top: 66.667%; left: 21.132%; }
     .loop-chart[data-active="designer"] .node-designer,
     .loop-chart[data-active="simulator"] .node-simulator,
-    .loop-chart[data-active="verifier"] .node-verifier,
-    .loop-chart[data-active="all"] .loop-node {
+    .loop-chart[data-active="verifier"] .node-verifier {
       width: 9.75rem;
       height: 9.75rem;
       background: #ffffff;
@@ -379,37 +339,11 @@
     }
     .loop-chart[data-active="designer"] .node-designer img,
     .loop-chart[data-active="simulator"] .node-simulator img,
-    .loop-chart[data-active="verifier"] .node-verifier img,
-    .loop-chart[data-active="all"] .loop-node img {
+    .loop-chart[data-active="verifier"] .node-verifier img {
       width: 4.05rem;
       height: 4.05rem;
       opacity: 1;
       filter: none;
-    }
-    /* Labels sit outside the circles so node size/layout stays intact */
-    .loop-label {
-      display: none;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      white-space: nowrap;
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: var(--blue);
-      text-align: center;
-      line-height: 1.3;
-      pointer-events: none;
-    }
-    .loop-chart[data-active="all"] .loop-label {
-      display: block;
-    }
-    .loop-chart[data-active="all"] .node-designer .loop-label {
-      bottom: calc(100% + 0.45rem);
-      top: auto;
-    }
-    .loop-chart[data-active="all"] .node-simulator .loop-label,
-    .loop-chart[data-active="all"] .node-verifier .loop-label {
-      top: calc(100% + 0.45rem);
     }
 
     .suite {
@@ -789,22 +723,20 @@
     </section>
 
     <section class="slide" data-title="هویت-جایگاه" data-section="۰۱ · اسمارتک">
-      <div class="identity-copy">
-        <h2>هویت و جایگاه</h2>
-        <p class="lede">زیرمجموعهٔ گروه دیجی‌کالا (شروع فعالیت ۹۸). به کسب‌وکارهای ایرانی کمک می‌کند مشتری را بهتر بشناسند، تبلیغ را درست‌تر خرج کنند، و اثر تعامل را بسنجند — با سوئیت marTech و adTech.</p>
-        <div class="tech-pair">
-          <div class="box">
-            <strong>marTech</strong>
-            <p>تعامل، بخش‌بندی، اتوماسیون پیام و نگهداشت — عمدتاً اینترک</p>
-          </div>
-          <div class="box">
-            <strong>adTech</strong>
-            <p>انتساب نصب، اجرای رسانه، همکاری فروش — ادتریس، ادورج، افیلیو</p>
-          </div>
-        </div>
-      </div>
-      <div class="identity-logo">
+      <div class="brand-row">
         <img class="brand-logo" src="../artifacts/smartech-logo.svg" alt="" />
+        <h2>هویت و جایگاه</h2>
+      </div>
+      <p class="lede">زیرمجموعهٔ گروه دیجی‌کالا (شروع فعالیت ۹۸). به کسب‌وکارهای ایرانی کمک می‌کند مشتری را بهتر بشناسند، تبلیغ را درست‌تر خرج کنند، و اثر تعامل را بسنجند — با سوئیت marTech و adTech.</p>
+      <div class="tech-pair">
+        <div class="box">
+          <strong>marTech</strong>
+          <p>تعامل، بخش‌بندی، اتوماسیون پیام و نگهداشت — عمدتاً اینترک</p>
+        </div>
+        <div class="box">
+          <strong>adTech</strong>
+          <p>انتساب نصب، اجرای رسانه، همکاری فروش — ادتریس، ادورج، افیلیو</p>
+        </div>
       </div>
     </section>
 
@@ -861,44 +793,41 @@
       </div>
     </section>
 
-    <!-- ۰۲ مساله و شواهد — پل اسمارتک → پیشنهاد -->
-    <section class="slide section-title" data-title="بخش-مساله-شواهد">
+    <!-- ۰۲ فضا — خلأ فرصت (جدا از معرفی شرکت) -->
+    <section class="slide section-title" data-title="بخش-فضا">
       <div class="section-head">
         <span class="badge">۰۲</span>
-        <h1>مساله و شواهد</h1>
+        <h1>فضا</h1>
       </div>
     </section>
 
-    <section class="slide split-module" data-title="از-اجرا-به-تصمیم" data-section="۰۲ · مساله و شواهد">
-      <!-- visual first in DOM → در RTL سمت راست (برعکس اسلایدهای پیشنهاد) -->
-      <div class="split-visual" aria-hidden="true">
-        <div class="loop-chart" data-active="all">
-          <svg class="loop-ring" viewBox="0 0 300 300">
-            <circle class="ring-base" cx="150" cy="150" r="100" />
-          </svg>
-          <div class="loop-node node-designer">
-            <img src="../artifacts/icon-designer.svg" alt="" />
-            <span class="loop-label">طراح کمپین</span>
-          </div>
-          <div class="loop-node node-simulator">
-            <img src="../artifacts/icon-simulator.svg" alt="" />
-            <span class="loop-label">شبیه‌ساز</span>
-          </div>
-          <div class="loop-node node-verifier">
-            <img src="../artifacts/icon-verifier.svg" alt="" />
-            <span class="loop-label">راستی‌آزما</span>
-          </div>
-        </div>
+    <section class="slide" data-title="خلا-مجاور" data-section="۰۲ · فضا">
+      <h2>خلأ مجاور</h2>
+      <p class="lede">تفسیر تیم از چهار راهکار: دو سر زنجیره پوشیده است — اندازه‌گیری و اجرا.</p>
+      <ul>
+        <li>اندازه‌گیری: نتیجه و انتساب را می‌گوید</li>
+        <li>اجرا: پیام، رسانه، همکاری فروش را جلو می‌برد</li>
+        <li>بین این دو: حلقهٔ <em>تصمیم کمپین</em> خالی است — همان فضای خط پیشنهادی</li>
+      </ul>
+      <p class="note">این دوتایی ادعای رسمی اسمارتک نیست؛ جمع‌بندی کارکرد محصولات است.</p>
+    </section>
+
+    <section class="slide section-title" data-title="بخش-مسئله">
+      <div class="section-head">
+        <span class="badge">۰۳</span>
+        <h1>مسئله و شواهد</h1>
       </div>
-      <div class="split-copy">
-        <h2>از اجرا به کیفیت تصمیم</h2>
-        <p class="lede">اگر داده و امکان اجرای کمپین را داریم، آیا می‌توانیم قبل از اجرا تصمیم بهتری بگیریم، اثر آن را پیش‌بینی کنیم و بعد از اجرا بفهمیم چرا نتیجه واقعی با انتظار ما متفاوت بوده است؟</p>
-        <ul>
-          <li>قبل از اجرا: از میان گزینه‌های ممکن، بهترین اقدام برای هر مشتری چیست؟</li>
-          <li>پیش از صرف بودجه: اگر این تصمیم را اجرا کنیم، احتمالاً چه نتیجه‌ای خواهیم گرفت؟</li>
-          <li>بعد از اجرا: نتیجه واقعی چه بود، چرا با پیش‌بینی تفاوت داشت و چه چیزی باید به تصمیم بعدی برگردد؟</li>
-        </ul>
-      </div>
+    </section>
+
+    <section class="slide" data-title="مشتری-مسئله" data-section="۰۳ · مسئله و شواهد">
+      <h2>خریدار = صاحب بودجه تبلیغات</h2>
+      <ul>
+        <li>ICP: اپ ایرانی با تبلیغات پولی مستمر + SDK فعال؛ آستانه ≥ ۲٫۱ همت (از اقتصاد واحد)</li>
+        <li>مسئله: ۴–۵ ساعت چسباندن دستی داده؛ وقتی نتیجه نمیخواند علت نامعلوم است → بودجه بعد با حدس (آی-۰۴)</li>
+        <li>جایگزین امروز: اکسل و ابزار رایگان — نه «نبود ابزار»</li>
+        <li>شاهد مخالف (آی-۰۱، وزن بالا): «ابزار اوکیه، بیزنسلاین نه»</li>
+      </ul>
+      <p class="warn">بزرگترین ضعف: صفر مصاحبه با صاحب بودجه — قیمت و بسته روی حدس است. شدت مسئله هم اندازهگیری نشده.</p>
     </section>
 
     <section class="slide section-title" data-title="بخش-پیشنهاد">
@@ -906,6 +835,29 @@
         <span class="badge">۰۴</span>
         <h1>پیشنهاد</h1>
       </div>
+    </section>
+
+    <section class="slide" data-title="حق-ورود" data-section="۰۴ · پیشنهاد">
+      <h2>حق ورود از هوش مصنوعی نیست</h2>
+      <ul>
+        <li>از دسترسی همزمان به طرح + اجرا + نتیجه است، با اعتماد انباشته</li>
+        <li>پیشنهاد ما خط مستقل است، نه فیچر روی ادتریس</li>
+        <li>اگر گیتها رد شوند: مسیر جایگزین = قابلیت روی ادتریس (آی-۰۱ حذف نشده، شاخه شده)</li>
+      </ul>
+    </section>
+
+    <section class="slide" data-title="حلقه" data-section="۰۴ · پیشنهاد">
+      <h2>یک حلقه، سه فاز</h2>
+      <div class="phases">
+        <span>طراح کمپین</span>
+        <span>شبیهساز</span>
+        <span>راستیآزمای</span>
+      </div>
+      <ul>
+        <li>جدا فروخته میشوند؛ بسته کامل ۲۳٪ ارزانتر از خرید تکهتکه</li>
+        <li>موتور قطعی و قابل حسابرسی زیر؛ AI فقط روایت میکند — حق ساختن عدد ندارد</li>
+      </ul>
+      <p class="demo">اینجا پروتوتایپ — سقف ۳ دقیقه · دمو ≠ اثبات تقاضا یا قیمت</p>
     </section>
 
     <section class="slide split-module" data-title="طراح-کمپین" data-section="۰۴ · پیشنهاد">
@@ -1099,6 +1051,53 @@
         </div>
       </div>
       <p class="warn">هیچ‌کدام از این بهبودها هنوز اندازه‌گیری نشده — پایلوت باید نشان دهد (فرضیهٔ A3-08).</p>
+    </section>
+
+    <section class="slide section-title" data-title="بخش-ورود-مشروط">
+      <div class="section-head">
+        <span class="badge">۰۶</span>
+        <h1>ورود مشروط</h1>
+      </div>
+    </section>
+
+    <section class="slide" data-title="ورود" data-section="۰۶ · ورود مشروط">
+      <h2>پیشروی با معیار کشتن</h2>
+      <div class="flow">
+        <div class="box">
+          <strong>۱ · گیتها</strong>
+          <p>داده · خریدار · بازار · پیشبینی مکتوب</p>
+          <p class="kill">رد → توقف یا بازنویسی درآمد</p>
+        </div>
+        <div class="box">
+          <strong>۲ · فاز ۱</strong>
+          <p>عرضه قابلفروش (ورود دستی پیشبینی)</p>
+          <p class="kill">مشروط به عبور گیتها ≈ ۲۰۷۰ م.ت</p>
+        </div>
+        <div class="box">
+          <strong>۳ · پایلوت</strong>
+          <p>۳ شرکت · معیار عددی · قاعده توقف</p>
+          <p class="kill">تعویق = ادامه پنهان نیست</p>
+        </div>
+        <div class="box">
+          <strong>۴ · فاز ۲/۳ یا شاخه</strong>
+          <p>تکمیل حلقه تا سقف ۱۷۰۴۰ م.ت</p>
+          <p class="kill">یا قابلیت روی ادتریس</p>
+        </div>
+      </div>
+      <ul>
+        <li>گیتها ≈ ۱۵۰ م.ت · اولین سود عملیاتی ماه ۱۹ · جمع سال ۲ هنوز منفی</li>
+        <li>هیچ مرحلهای پیش از نتیجه مرحله قبل شروع نمیشود</li>
+      </ul>
+    </section>
+
+    <section class="slide" data-title="بسته" data-section="۰۶ · ورود مشروط">
+      <h2>آنچه هنوز نمیدانیم</h2>
+      <ul>
+        <li>تمایل به پرداخت صاحب بودجه در مرتبه قیمت ما</li>
+        <li>شدت و فراوانی واقعی مسئله در میدان</li>
+        <li>آیا خط مستقل زنده میماند، یا شاخه قابلیت روی ادتریس</li>
+      </ul>
+      <p class="lede">تصمیم پیشنهادی: ورود مشروط — با گیت، نه با شعار. سپاس از توجه شما.</p>
     </section>
 
   </div>
