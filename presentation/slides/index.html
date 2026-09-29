@@ -56,6 +56,37 @@
     .slide.center .lede,
     .slide.center .team { max-width: 36ch; }
 
+    .slide[data-title="آدرس-پروتوتایپ"] {
+      align-items: center;
+      text-align: center;
+      gap: 1.5rem;
+    }
+    .slide[data-title="آدرس-پروتوتایپ"] h2 {
+      max-width: none;
+      color: var(--blue);
+    }
+    .slide[data-title="آدرس-پروتوتایپ"] .qr {
+      width: min(42vh, 17rem);
+      height: auto;
+      display: block;
+      margin-inline: auto;
+    }
+    .slide[data-title="آدرس-پروتوتایپ"] .qr-url {
+      font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+      font-weight: 600;
+      color: var(--muted);
+      direction: ltr;
+      unicode-bidi: isolate;
+    }
+    .slide[data-title="آدرس-پروتوتایپ"] .qr-url a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .slide[data-title="آدرس-پروتوتایپ"] .qr-url a:hover {
+      color: var(--blue);
+      text-decoration: underline;
+    }
+
     /* Full section-title slide (divider only) */
     .slide.section-title {
       align-items: flex-start;
@@ -1602,6 +1633,12 @@
           <li>بعد از اجرا: نتیجه واقعی چه بود، چرا با پیش‌بینی تفاوت داشت و چه چیزی باید به تصمیم بعدی برگردد؟</li>
         </ul>
       </div>
+    </section>
+
+    <section class="slide center" data-title="آدرس-پروتوتایپ" data-section="۰۲ · خط کسب‌وکار">
+      <h2>آدرس پروتوتایپ</h2>
+      <img class="qr" src="../artifacts/pezhvak-qr.svg" alt="QR کد http://pezhvakplatform.ir/" />
+      <p class="qr-url"><a href="http://pezhvakplatform.ir/" target="_blank" rel="noopener">pezhvakplatform.ir</a></p>
     </section>
 
     <section class="slide split-module" data-title="طراح-کمپین" data-section="۰۲ · خط کسب‌وکار">
