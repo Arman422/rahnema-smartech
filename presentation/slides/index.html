@@ -1391,13 +1391,18 @@
       white-space: nowrap;
       overflow: visible;
     }
+    /* ارتفاع = ارتفاع باکس؛ عرض از نسبت viewBox (بدون stretch) → ≈≤۲/۳ عرض */
     .slide[data-title="بازگشت-سرمایه"] .roi-chart {
-      width: 100%;
       height: 100%;
+      width: auto;
       max-height: 100%;
+      aspect-ratio: 960 / 360;
       display: block;
       overflow: visible;
       direction: ltr;
+      flex: 0 0 auto;
+      /* ≈۱/۶ عرض چارت به راست (مرکز بصری) */
+      transform: translateX(13%);
     }
     .slide[data-title="بازگشت-سرمایه"] .roi-grid {
       stroke: rgba(28, 36, 52, 0.1);
@@ -1433,11 +1438,17 @@
       font-family: "Vazirmatn", system-ui, sans-serif;
       font-size: 12px;
       font-weight: 600;
-      direction: rtl;
       unicode-bidi: isolate;
     }
-    .slide[data-title="بازگشت-سرمایه"] .roi-tick-y { text-anchor: end; }
-    .slide[data-title="بازگشت-سرمایه"] .roi-tick-x { text-anchor: middle; }
+    /* LTR + end → متن سمت چپِ لنگر می‌ماند، روی پلات نمی‌آید */
+    .slide[data-title="بازگشت-سرمایه"] .roi-tick-y {
+      text-anchor: end;
+      direction: ltr;
+    }
+    .slide[data-title="بازگشت-سرمایه"] .roi-tick-x {
+      text-anchor: middle;
+      direction: rtl;
+    }
     .slide[data-title="بازگشت-سرمایه"] .roi-line {
       stroke-width: 2.75;
       stroke-linejoin: round;
@@ -1445,7 +1456,7 @@
     }
     .slide[data-title="بازگشت-سرمایه"] .roi-end {
       font-family: "Vazirmatn", system-ui, sans-serif;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 800;
       direction: rtl;
       unicode-bidi: isolate;
@@ -2008,43 +2019,43 @@
       </div>
       <div class="value-visual">
         <div class="roi-chart-wrap">
-        <svg class="roi-chart" viewBox="0 0 1240 360" role="img" aria-label="جریان نقدی تجمعی تا ماه ۴۸ برای سه سناریو">
-          <foreignObject x="100" y="2" width="920" height="28">
+        <svg class="roi-chart" viewBox="0 0 960 360" preserveAspectRatio="xMidYMid meet" role="img" aria-label="جریان نقدی تجمعی تا ماه ۴۸ برای سه سناریو">
+          <foreignObject x="78" y="2" width="513" height="28">
             <div xmlns="http://www.w3.org/1999/xhtml" class="roi-legend-svg" aria-hidden="true">
               <span class="lg-orange"><i></i>بدون دو اهرم — ماه ۴۶</span>
               <span class="lg-blue"><i></i>پایه — ماه ۳۵</span>
               <span class="lg-teal"><i></i>پایه + مگا — ماه ۲۲</span>
             </div>
           </foreignObject>
-          <line class="roi-grid" x1="100" y1="310.0" x2="1020" y2="310.0" />
-          <text class="roi-tick-y" x="90" y="314.0">منفی ۲۰٬۰۰۰</text>
-          <line class="roi-zero" x1="100" y1="270.9" x2="1020" y2="270.9" />
-          <text class="roi-tick-y" x="90" y="274.9">صفر</text>
-          <line class="roi-grid" x1="100" y1="212.1" x2="1020" y2="212.1" />
-          <text class="roi-tick-y" x="90" y="216.1">۳۰٬۰۰۰</text>
-          <line class="roi-grid" x1="100" y1="153.4" x2="1020" y2="153.4" />
-          <text class="roi-tick-y" x="90" y="157.4">۶۰٬۰۰۰</text>
-          <line class="roi-grid" x1="100" y1="94.7" x2="1020" y2="94.7" />
-          <text class="roi-tick-y" x="90" y="98.7">۹۰٬۰۰۰</text>
-          <line class="roi-grid" x1="100" y1="36.0" x2="1020" y2="36.0" />
-          <text class="roi-tick-y" x="90" y="40.0">۱۲۰٬۰۰۰</text>
-          <line class="roi-horizon" x1="550.2" y1="36" x2="550.2" y2="310" />
-          <text class="roi-horizon-label" x="562" y="34">افق مدل ۲۴ ماهه</text>
-          <line class="roi-axis" x1="100" y1="310" x2="1020" y2="310" />
-          <text class="roi-tick-x" x="100.0" y="332">ماه ۱</text>
-          <text class="roi-tick-x" x="315.3" y="332">ماه ۱۲</text>
-          <text class="roi-tick-x" x="550.2" y="332">ماه ۲۴</text>
-          <text class="roi-tick-x" x="785.1" y="332">ماه ۳۶</text>
-          <text class="roi-tick-x" x="1020.0" y="332">ماه ۴۸</text>
-          <path class="roi-line orange" d="M 100.0 270.9 L 119.6 271.4 L 139.1 272.6 L 158.7 274.0 L 178.3 275.2 L 197.9 275.8 L 217.4 276.8 L 237.0 279.3 L 256.6 282.6 L 276.2 285.9 L 295.7 288.4 L 315.3 289.4 L 334.9 291.4 L 354.5 295.8 L 374.0 300.2 L 393.6 302.2 L 413.2 302.7 L 432.8 303.9 L 452.3 305.1 L 471.9 305.7 L 491.5 305.0 L 511.1 303.4 L 530.6 301.9 L 550.2 301.2 L 569.8 300.5 L 589.4 298.9 L 608.9 296.8 L 628.5 294.7 L 648.1 293.0 L 667.7 292.4 L 687.2 291.5 L 706.8 289.3 L 726.4 286.7 L 746.0 284.5 L 765.5 283.6 L 785.1 282.9 L 804.7 281.2 L 824.3 279.1 L 843.8 277.4 L 863.4 276.7 L 883.0 276.3 L 902.6 275.2 L 922.1 273.8 L 941.7 272.4 L 961.3 271.3 L 980.9 270.9 L 1000.4 268.9 L 1020.0 267.0" fill="none" stroke="#c45c26" />
-          <path class="roi-line blue" d="M 100.0 270.9 L 119.6 271.4 L 139.1 272.6 L 158.7 274.0 L 178.3 275.2 L 197.9 275.8 L 217.4 276.7 L 237.0 279.0 L 256.6 282.1 L 276.2 285.2 L 295.7 287.5 L 315.3 288.5 L 334.9 291.0 L 354.5 296.7 L 374.0 302.4 L 393.6 304.9 L 413.2 304.7 L 432.8 304.0 L 452.3 303.4 L 471.9 303.1 L 491.5 301.8 L 511.1 298.7 L 530.6 295.7 L 550.2 294.3 L 569.8 293.4 L 589.4 291.0 L 608.9 288.0 L 628.5 284.9 L 648.1 282.6 L 667.7 281.6 L 687.2 280.5 L 706.8 277.8 L 726.4 274.6 L 746.0 272.0 L 765.5 270.9 L 785.1 269.6 L 804.7 266.2 L 824.3 261.6 L 843.8 256.6 L 863.4 252.0 L 883.0 248.7 L 902.6 247.4 L 922.1 245.5 L 941.7 240.9 L 961.3 235.0 L 980.9 229.0 L 1000.4 224.4 L 1020.0 222.6" fill="none" stroke="#2e47f5" />
-          <path class="roi-line teal" d="M 100.0 270.9 L 119.6 271.3 L 139.1 272.4 L 158.7 273.6 L 178.3 274.7 L 197.9 275.2 L 217.4 275.9 L 237.0 277.9 L 256.6 280.3 L 276.2 282.8 L 295.7 284.8 L 315.3 285.5 L 334.9 287.8 L 354.5 290.0 L 374.0 288.9 L 393.6 286.3 L 413.2 283.8 L 432.8 282.6 L 452.3 280.8 L 471.9 276.7 L 491.5 272.7 L 511.1 270.9 L 530.6 263.0 L 550.2 255.2 L 569.8 252.3 L 589.4 245.1 L 608.9 235.6 L 628.5 226.2 L 648.1 219.0 L 667.7 216.1 L 687.2 212.1 L 706.8 202.4 L 726.4 189.6 L 746.0 176.9 L 765.5 167.1 L 785.1 163.2 L 804.7 158.1 L 824.3 145.5 L 843.8 129.0 L 863.4 112.5 L 883.0 99.8 L 902.6 94.7 L 922.1 89.7 L 941.7 77.2 L 961.3 60.9 L 980.9 44.7 L 1000.4 32.2 L 1020.0 27.2" fill="none" stroke="#0f7a6e" />
-          <circle cx="511.1" cy="270.9" r="4.5" fill="#fff" stroke="#0f7a6e" stroke-width="2.5" />
-          <circle cx="765.5" cy="270.9" r="4.5" fill="#fff" stroke="#2e47f5" stroke-width="2.5" />
-          <circle cx="980.9" cy="270.9" r="4.5" fill="#fff" stroke="#c45c26" stroke-width="2.5" />
-          <text class="roi-end" x="1030" y="27.2" fill="#0f7a6e">پایه + مگا | ۱۲۴٬۵۰۶</text>
-          <text class="roi-end" x="1030" y="222.6" fill="#2e47f5">پایه | ۲۴٬۶۶۳</text>
-          <text class="roi-end" x="1030" y="267" fill="#c45c26">بدون دو اهرم | ۱٬۹۹۶</text>
+          <line class="roi-grid" x1="78" y1="310.0" x2="591" y2="310.0" />
+          <text class="roi-tick-y" x="54" y="314.0">منفی ۲۰٬۰۰۰</text>
+          <line class="roi-zero" x1="78" y1="270.9" x2="591" y2="270.9" />
+          <text class="roi-tick-y" x="54" y="274.9">صفر</text>
+          <line class="roi-grid" x1="78" y1="212.1" x2="591" y2="212.1" />
+          <text class="roi-tick-y" x="54" y="216.1">۳۰٬۰۰۰</text>
+          <line class="roi-grid" x1="78" y1="153.4" x2="591" y2="153.4" />
+          <text class="roi-tick-y" x="54" y="157.4">۶۰٬۰۰۰</text>
+          <line class="roi-grid" x1="78" y1="94.7" x2="591" y2="94.7" />
+          <text class="roi-tick-y" x="54" y="98.7">۹۰٬۰۰۰</text>
+          <line class="roi-grid" x1="78" y1="36.0" x2="591" y2="36.0" />
+          <text class="roi-tick-y" x="54" y="40.0">۱۲۰٬۰۰۰</text>
+          <line class="roi-horizon" x1="329.0" y1="36" x2="329.0" y2="310" />
+          <text class="roi-horizon-label" x="337.0" y="34">افق مدل ۲۴ ماهه</text>
+          <line class="roi-axis" x1="78" y1="310" x2="591" y2="310" />
+          <text class="roi-tick-x" x="78.0" y="332">ماه ۱</text>
+          <text class="roi-tick-x" x="198.1" y="332">ماه ۱۲</text>
+          <text class="roi-tick-x" x="329.0" y="332">ماه ۲۴</text>
+          <text class="roi-tick-x" x="460.0" y="332">ماه ۳۶</text>
+          <text class="roi-tick-x" x="591.0" y="332">ماه ۴۸</text>
+          <path class="roi-line orange" d="M 78.0 270.9 L 88.9 271.4 L 99.8 272.6 L 110.7 274.0 L 121.7 275.2 L 132.6 275.8 L 143.5 276.8 L 154.4 279.3 L 165.3 282.6 L 176.2 285.9 L 187.1 288.4 L 198.1 289.4 L 209.0 291.4 L 219.9 295.8 L 230.8 300.2 L 241.7 302.2 L 252.6 302.7 L 263.6 303.9 L 274.5 305.1 L 285.4 305.7 L 296.3 305.0 L 307.2 303.4 L 318.1 301.9 L 329.0 301.2 L 340.0 300.5 L 350.9 298.9 L 361.8 296.8 L 372.7 294.7 L 383.6 293.0 L 394.5 292.4 L 405.4 291.5 L 416.4 289.3 L 427.3 286.7 L 438.2 284.5 L 449.1 283.6 L 460.0 282.9 L 470.9 281.2 L 481.9 279.1 L 492.8 277.4 L 503.7 276.7 L 514.6 276.3 L 525.5 275.2 L 536.4 273.8 L 547.3 272.4 L 558.3 271.3 L 569.2 270.9 L 580.1 268.9 L 591.0 267.0" fill="none" stroke="#c45c26" />
+          <path class="roi-line blue" d="M 78.0 270.9 L 88.9 271.4 L 99.8 272.6 L 110.7 274.0 L 121.7 275.2 L 132.6 275.8 L 143.5 276.7 L 154.4 279.0 L 165.3 282.1 L 176.2 285.2 L 187.1 287.5 L 198.1 288.5 L 209.0 291.0 L 219.9 296.7 L 230.8 302.4 L 241.7 304.9 L 252.6 304.7 L 263.6 304.0 L 274.5 303.4 L 285.4 303.1 L 296.3 301.8 L 307.2 298.7 L 318.1 295.7 L 329.0 294.3 L 340.0 293.4 L 350.9 291.0 L 361.8 288.0 L 372.7 284.9 L 383.6 282.6 L 394.5 281.6 L 405.4 280.5 L 416.4 277.8 L 427.3 274.6 L 438.2 272.0 L 449.1 270.9 L 460.0 269.6 L 470.9 266.2 L 481.9 261.6 L 492.8 256.6 L 503.7 252.0 L 514.6 248.7 L 525.5 247.4 L 536.4 245.5 L 547.3 240.9 L 558.3 235.0 L 569.2 229.0 L 580.1 224.4 L 591.0 222.6" fill="none" stroke="#2e47f5" />
+          <path class="roi-line teal" d="M 78.0 270.9 L 88.9 271.3 L 99.8 272.4 L 110.7 273.6 L 121.7 274.7 L 132.6 275.2 L 143.5 275.9 L 154.4 277.9 L 165.3 280.3 L 176.2 282.8 L 187.1 284.8 L 198.1 285.5 L 209.0 287.8 L 219.9 290.0 L 230.8 288.9 L 241.7 286.3 L 252.6 283.8 L 263.6 282.6 L 274.5 280.8 L 285.4 276.7 L 296.3 272.7 L 307.2 270.9 L 318.1 263.0 L 329.0 255.2 L 340.0 252.3 L 350.9 245.1 L 361.8 235.6 L 372.7 226.2 L 383.6 219.0 L 394.5 216.1 L 405.4 212.1 L 416.4 202.4 L 427.3 189.6 L 438.2 176.9 L 449.1 167.1 L 460.0 163.2 L 470.9 158.1 L 481.9 145.5 L 492.8 129.0 L 503.7 112.5 L 514.6 99.8 L 525.5 94.7 L 536.4 89.7 L 547.3 77.2 L 558.3 60.9 L 569.2 44.7 L 580.1 32.2 L 591.0 27.2" fill="none" stroke="#0f7a6e" />
+          <circle cx="307.2" cy="270.9" r="4.5" fill="#fff" stroke="#0f7a6e" stroke-width="2.5" />
+          <circle cx="449.1" cy="270.9" r="4.5" fill="#fff" stroke="#2e47f5" stroke-width="2.5" />
+          <circle cx="569.2" cy="270.9" r="4.5" fill="#fff" stroke="#c45c26" stroke-width="2.5" />
+          <text class="roi-end" x="601" y="27.2" fill="#0f7a6e">پایه + مگا | ۱۲۴٬۵۰۶</text>
+          <text class="roi-end" x="601" y="222.6" fill="#2e47f5">پایه | ۲۴٬۶۶۳</text>
+          <text class="roi-end" x="601" y="267.0" fill="#c45c26">بدون دو اهرم | ۱٬۹۹۶</text>
         </svg>
         </div>
         <p class="roi-caption">میلیون تومان • عدد کنار هر نام در راهنما، ماه بازگشت سرمایه است • ماه ۲۵ به بعد ادامه‌ی فرض‌های مدل است، نه داده</p>
