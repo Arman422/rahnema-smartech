@@ -867,18 +867,27 @@
     .slide[data-title="نقشهراه"] h2 {
       max-width: none;
     }
+    .gantt-block {
+      flex: 1;
+      min-height: 0;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.9rem;
+    }
     .gantt-note {
       font-size: 0.9rem;
       color: var(--muted);
       font-weight: 500;
       line-height: 1.55;
-      max-width: 56ch;
-      margin-top: -0.35rem;
+      text-align: center;
+      align-self: center;
+      margin: 0;
     }
     .gantt {
       direction: ltr;
       width: 100%;
-      margin-top: 0.5rem;
       display: flex;
       flex-direction: column;
       gap: 0.55rem;
@@ -906,7 +915,7 @@
     }
     .gantt-row {
       position: relative;
-      height: 2.55rem;
+      height: 3.9rem;
       z-index: 1;
     }
     .gantt-bar {
@@ -914,17 +923,30 @@
       top: 0;
       height: 100%;
       display: flex;
-      align-items: center;
-      padding: 0 0.85rem;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 0.12rem;
+      padding: 0 0.9rem;
       border-radius: 8px;
       background: var(--blue);
       color: #fff;
-      font-size: clamp(0.78rem, 1.05vw, 0.92rem);
+      font-size: clamp(0.82rem, 1.1vw, 0.95rem);
       font-weight: 700;
-      white-space: nowrap;
       overflow: hidden;
-      text-overflow: ellipsis;
+      text-align: right;
       box-shadow: 0 8px 22px rgba(46, 71, 245, 0.18);
+    }
+    .gantt-bar .bar-title {
+      white-space: nowrap;
+      line-height: 1.2;
+    }
+    .gantt-bar .bar-meta {
+      font-weight: 500;
+      font-size: 0.78em;
+      opacity: 0.88;
+      white-space: nowrap;
+      line-height: 1.2;
     }
     .gantt-bar.pilot {
       background: #e8ecff;
@@ -987,20 +1009,6 @@
       color: var(--blue);
       font-weight: 800;
     }
-    .gantt-legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem 1.4rem;
-      margin-top: 0.35rem;
-      font-size: 0.82rem;
-      color: var(--muted);
-      font-weight: 500;
-    }
-    .gantt-legend strong {
-      color: var(--ink);
-      font-weight: 700;
-    }
-
     /* تصمیم و درخواست — جدول متنی (اسلاید ۱۷) */
     .slide[data-title="تصمیم-درخواست"] {
       justify-content: flex-start;
@@ -2151,45 +2159,44 @@
 
     <section class="slide" data-title="نقشهراه" data-section="۰۴ · فاز اجرایی">
       <h2>نقشهٔ راه ساخت</h2>
-      <p class="gantt-note">هر واحد روی محور افقی = یک ماه تقویمی. ساخت فقط بعد از عبور چهار گیت (ورود مشروط).</p>
-      <div class="gantt" aria-label="گانت نقشه راه" style="--m: 17;">
-        <div class="gantt-rows">
-          <!-- 3 weeks ≈ 0.75 month; releases at M4 / M9 / M17 -->
-          <div class="gantt-row">
-            <div class="gantt-bar pilot" style="left: 0%; width: calc(0.75 / 17 * 100%);" title="۳ هفته">
-              <span class="pilot-label">ورود مشروط · ۳ هفته</span>
+      <div class="gantt-block">
+        <div class="gantt" aria-label="گانت نقشه راه" style="--m: 17;">
+          <div class="gantt-rows">
+            <!-- 3 weeks ≈ 0.75 month; releases at M4 / M9 / M17 -->
+            <div class="gantt-row">
+              <div class="gantt-bar pilot" style="left: 0%; width: calc(0.75 / 17 * 100%);" title="۳ هفته">
+                <span class="pilot-label">ورود مشروط · ۳ هفته</span>
+              </div>
+            </div>
+            <div class="gantt-row">
+              <div class="gantt-bar" style="left: calc(0.75 / 17 * 100%); width: calc(3.25 / 17 * 100%);">
+                <span class="bar-title">راستی‌آزما</span>
+                <span class="bar-meta">فاز ۱ · ۳۰٪ قیمت · ۱۴٫۳ نفر-ماه</span>
+              </div>
+            </div>
+            <div class="gantt-row">
+              <div class="gantt-bar" style="left: calc(4 / 17 * 100%); width: calc(5 / 17 * 100%);">
+                <span class="bar-title">طراح کمپین</span>
+                <span class="bar-meta">فاز ۲ · ۷۵٪ تجمعی · ۱۸ نفر-ماه</span>
+              </div>
+            </div>
+            <div class="gantt-row">
+              <div class="gantt-bar" style="left: calc(9 / 17 * 100%); width: calc(8 / 17 * 100%);">
+                <span class="bar-title">شبیه‌ساز</span>
+                <span class="bar-meta">فاز ۳ · ۱۰۰٪ · ۲۰ نفر-ماه</span>
+              </div>
             </div>
           </div>
-          <div class="gantt-row">
-            <div class="gantt-bar" style="left: calc(0.75 / 17 * 100%); width: calc(3.25 / 17 * 100%);">
-              راستی‌آزما
-            </div>
-          </div>
-          <div class="gantt-row">
-            <div class="gantt-bar" style="left: calc(4 / 17 * 100%); width: calc(5 / 17 * 100%);">
-              طراح کمپین
-            </div>
-          </div>
-          <div class="gantt-row">
-            <div class="gantt-bar" style="left: calc(9 / 17 * 100%); width: calc(8 / 17 * 100%);">
-              شبیه‌ساز
-            </div>
+          <div class="gantt-axis" aria-hidden="true">
+            <div class="gantt-tick" style="left: 0%"><span>شروع</span></div>
+            <div class="gantt-tick milestone" style="left: calc(4 / 17 * 100%)"><span>ماه ۴</span></div>
+            <div class="gantt-tick milestone" style="left: calc(9 / 17 * 100%)"><span>ماه ۹</span></div>
+            <div class="gantt-tick" style="left: calc(12 / 17 * 100%)"><span>۱۲</span></div>
+            <div class="gantt-tick milestone" style="left: 100%"><span>ماه ۱۷</span></div>
           </div>
         </div>
-        <div class="gantt-axis" aria-hidden="true">
-          <div class="gantt-tick" style="left: 0%"><span>شروع</span></div>
-          <div class="gantt-tick milestone" style="left: calc(4 / 17 * 100%)"><span>ماه ۴</span></div>
-          <div class="gantt-tick milestone" style="left: calc(9 / 17 * 100%)"><span>ماه ۹</span></div>
-          <div class="gantt-tick" style="left: calc(12 / 17 * 100%)"><span>۱۲</span></div>
-          <div class="gantt-tick milestone" style="left: 100%"><span>ماه ۱۷</span></div>
-        </div>
-        <div class="gantt-legend">
-          <span><strong>فاز ۱</strong> راستی‌آزما · ۳۰٪ قیمت · ۱۴٫۳ نفر-ماه</span>
-          <span><strong>فاز ۲</strong> طراح · ۷۵٪ تجمعی · ۱۸ نفر-ماه</span>
-          <span><strong>فاز ۳</strong> شبیه‌ساز · ۱۰۰٪ · ۲۰ نفر-ماه</span>
-        </div>
+        <p class="gantt-note">هر واحد روی محور افقی معادل یک ماه است</p>
       </div>
-      <p class="note">عرضه از ارزان‌ترین و مستقل‌ترین فاز؛ هر فاز جدا فروخته می‌شود. · گزارش ۶.۱، ۶.۳، ۱۰.۲</p>
     </section>
 
   </div>
