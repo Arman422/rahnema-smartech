@@ -87,6 +87,29 @@
       text-decoration: underline;
     }
 
+    /* Mini QR — injected on slides after آدرس-پروتوتایپ (not dividers).
+       fixed so last slide (نقشه‌راه, max-width centered) keeps same corner. */
+    .qr-mini {
+      position: fixed;
+      z-index: 4;
+      inset-inline-start: 1.15rem;
+      bottom: 3.2rem; /* above fixed footer */
+      width: 7rem;
+      height: 7rem;
+      padding: 0.4rem;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      box-shadow: 0 6px 18px rgba(40, 55, 120, 0.1);
+      line-height: 0;
+      text-decoration: none;
+    }
+    .qr-mini img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
     /* Full section-title slide (divider only) */
     .slide.section-title {
       align-items: flex-start;
@@ -2188,6 +2211,23 @@
     const counter = document.getElementById("counter");
     const sectionLabel = document.getElementById("sectionLabel");
     let i = 0;
+
+    const qrSlideIdx = slides.findIndex((s) => s.dataset.title === "آدرس-پروتوتایپ");
+    if (qrSlideIdx >= 0) {
+      slides.forEach((s, idx) => {
+        if (idx <= qrSlideIdx) return;
+        if (s.classList.contains("section-title")) return;
+        const a = document.createElement("a");
+        a.className = "qr-mini";
+        a.href = "https://pezhvakplatform.ir/";
+        a.target = "_blank";
+        a.rel = "noopener";
+        a.title = "پروتوتایپ پژواک";
+        a.setAttribute("aria-label", "آدرس پروتوتایپ پژواک");
+        a.innerHTML = '<img src="../artifacts/pezhvak-qr.svg" alt="" />';
+        s.appendChild(a);
+      });
+    }
 
     function show(n) {
       i = Math.max(0, Math.min(slides.length - 1, n));
